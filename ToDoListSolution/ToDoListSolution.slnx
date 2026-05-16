@@ -1,1 +1,5 @@
-<Solution />
+<Solution>
+  <Project Path="ToDoListBL/ToDoListBL.csproj" />
+  <Project Path="ToDoListDL/ToDoListDL.csproj" />
+  <Project Path="ToDoListGUI/ToDoListGUI.csproj" />
+</Solution>
