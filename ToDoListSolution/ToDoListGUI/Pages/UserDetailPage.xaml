@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoListGUI.Pages.NewPage1"
+             Title="User Details">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <VerticalStackLayout>
+            <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="PHOTO (URL)"></Label>
+            <Image Margin="8" Source=""></Image>
+            <Entry Margin="8"></Entry>
+            <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="FIRST NAME"></Label>
+            <Entry Margin="8"></Entry>
+            <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="LAST NAME"></Label>
+            <Entry Margin="8"></Entry>
+            <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="DATE OF BIRTH"></Label>
+            <DatePicker Margin="8"></DatePicker>
+        </VerticalStackLayout>
+        <Button Margin="8" Grid.Row="1" Grid.Column="0" Text="Cancel" BackgroundColor="IndianRed"></Button>
+        <Button Margin="8" Grid.Row="1" Grid.Column="1" Text="Save" BackgroundColor="PaleGreen"></Button>
+        <Button Margin="8" Grid.Row="1" Grid.Column="2" Text="Delete" BackgroundColor="PaleVioletRed"></Button>
+    </Grid>
+
+</ContentPage>
