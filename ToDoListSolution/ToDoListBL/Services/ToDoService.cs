@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ToDoListBL.Domain;
 using ToDoListBL.Interfaces;
 
 namespace ToDoListBL.Services
@@ -12,6 +13,11 @@ namespace ToDoListBL.Services
         public ToDoService(IToDoRepository repo)
         {
             _repo = repo;
+        }
+
+        public List<Todo> GetTasks()
+        {
+            return _repo.GetTasks();
         }
     }
 }
