@@ -1,5 +1,6 @@
 ﻿using ToDoListBL.Interfaces;
 using ToDoListBL.Services;
+using ToDoListGUI.ViewModels.TaskList;
 
 namespace ToDoListGUI.Pages
 {
@@ -9,6 +10,7 @@ namespace ToDoListGUI.Pages
         public TaskListPage(ToDoService toDoService)
         {
             InitializeComponent();
+            BindingContext = new TaskListViewModel(toDoService);
         }
 
     }

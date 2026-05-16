@@ -22,8 +22,31 @@
         </HorizontalStackLayout>
 
         <CollectionView Grid.Row="1" 
-                        Grid.ColumnSpan="2">
-            
+                        Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Tasks}"
+                        Margin="8">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8"></LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <HorizontalStackLayout>
+                            <CheckBox Margin="8" 
+                                  IsChecked="{Binding IsComplete}"
+                                  VerticalOptions="Center"
+                                  HorizontalOptions="Center"></CheckBox>
+                            <VerticalStackLayout>
+                                <Label FontAttributes="Bold" 
+                                   Text="{Binding Title}"
+                                   Margin="8, 8, 8, 2"></Label>
+                                <Label Text="{Binding Description}"
+                                   Margin="8, 2, 8, 8"></Label>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
         </CollectionView>
 
         <Button Grid.Row="2" 
