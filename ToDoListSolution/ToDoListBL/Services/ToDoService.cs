@@ -19,5 +19,10 @@ namespace ToDoListBL.Services
         {
             return _repo.GetTasks();
         }
+
+        public void UpdateTask(Todo todo)
+        {
+            _repo.UpdateTask(todo);
+        }
     }
 }

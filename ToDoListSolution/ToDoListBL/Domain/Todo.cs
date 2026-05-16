@@ -18,7 +18,7 @@ namespace ToDoListBL.Domain
         public int Id {  get; init; }
         public string Title { get; init; }
         public string Description { get; init; }
-        public bool IsCompleted { get; init; }
+        public bool IsCompleted { get; set; }
         public int ResponsibleUserId { get; init; }
     }
 }

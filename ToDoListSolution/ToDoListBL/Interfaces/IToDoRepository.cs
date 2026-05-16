@@ -8,5 +8,6 @@ namespace ToDoListBL.Interfaces
     public interface IToDoRepository
     {
         public List<Todo> GetTasks();
+        public void UpdateTask(Todo todo);
     }
 }

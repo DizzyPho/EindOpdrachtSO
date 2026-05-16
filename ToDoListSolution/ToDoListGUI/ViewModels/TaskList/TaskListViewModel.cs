@@ -12,7 +12,7 @@ namespace ToDoListGUI.ViewModels.TaskList
         {
             Tasks = new ObservableCollection<TaskViewModel>(
                                             toDoService.GetTasks()
-                                            .Select(todo => new TaskViewModel(todo)));
+                                            .Select(todo => new TaskViewModel(todo, toDoService)));
         }
 
         public ObservableCollection<TaskViewModel> Tasks { get; }

@@ -21,5 +21,10 @@ namespace ToDoListDL.Repositories
         {
             return _db.GetCollection<Todo>().FindAll().ToList();
         }
+
+        public void UpdateTask(Todo todo)
+        {
+            _db.GetCollection<Todo>().Update(todo);
+        }
     }
 }
