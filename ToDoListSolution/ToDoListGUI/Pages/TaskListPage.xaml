@@ -30,20 +30,35 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border>
-                        <HorizontalStackLayout>
+                    <Border Background="AliceBlue">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label FontAttributes="Bold" 
+                                 Text="{Binding Title}"
+                                 Margin="8, 8, 8, 2"
+                                 Grid.Row="0"
+                                 Grid.Column="1"></Label>
+                            <Label Text="{Binding Description}"
+                                 Margin="8, 2, 8, 8"
+                                 MaxLines="2"
+                                 LineBreakMode="WordWrap"
+                                 Grid.Row="1"
+                                 Grid.Column="1"></Label>
+
                             <CheckBox Margin="8" 
                                   IsChecked="{Binding IsCompleted}"
                                   VerticalOptions="Center"
-                                  HorizontalOptions="Center"></CheckBox>
-                            <VerticalStackLayout>
-                                <Label FontAttributes="Bold" 
-                                   Text="{Binding Title}"
-                                   Margin="8, 8, 8, 2"></Label>
-                                <Label Text="{Binding Description}"
-                                   Margin="8, 2, 8, 8"></Label>
-                            </VerticalStackLayout>
-                        </HorizontalStackLayout>
+                                  HorizontalOptions="Center"                                 
+                                  Grid.RowSpan="2"
+                                  Grid.Column="0"></CheckBox>
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
