@@ -2,6 +2,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListGUI.MainPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+       
 
+        <HorizontalStackLayout Grid.Row="0" 
+                               Grid.ColumnSpan="2">
+            <Button Text="Show All" Margin="8" BackgroundColor="PaleVioletRed"></Button>
+            <Button Text="Show Unfinished" Margin="8" BackgroundColor="PaleVioletRed"></Button>
+            <Button Text="Show All (sort by most recent)" Margin="8" BackgroundColor="PaleVioletRed"></Button>
+        </HorizontalStackLayout>
 
+        <CollectionView Grid.Row="1" 
+                        Grid.ColumnSpan="2">
+            
+        </CollectionView>
+
+        <Button Grid.Row="2" 
+                Grid.Column="0" 
+                Margin="8"
+                Text="Users"
+                BackgroundColor="DarkViolet"></Button>
+        <Button Grid.Row="2" 
+                Grid.Column="1" 
+                Margin="8"
+                Text="New Task"
+                BackgroundColor="DarkViolet"></Button>
+        
+    </Grid>
 </ContentPage>
