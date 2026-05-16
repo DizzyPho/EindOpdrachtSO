@@ -22,7 +22,7 @@
             <Label Margin="8" Text="COMPLETED?" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
             <CheckBox></CheckBox>
         </VerticalStackLayout>
-        <Button Margin="8" Grid.Row="0" Text="Cancel" BackgroundColor="IndianRed"></Button>
-        <Button Margin="8" Grid.Row="0" Text="Save" BackgroundColor="PaleGreen"></Button>
+        <Button Margin="8" Grid.Row="1" Text="Cancel" BackgroundColor="IndianRed"></Button>
+        <Button Margin="8" Grid.Row="1" Text="Save" BackgroundColor="PaleGreen"></Button>
     </Grid>
 </ContentPage>
