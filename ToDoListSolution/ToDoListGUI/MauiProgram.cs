@@ -1,6 +1,7 @@
 ﻿using LiteDB;
 using Microsoft.Extensions.Logging;
 using ToDoListBL.Interfaces;
+using ToDoListBL.Services;
 using ToDoListDL.Connections;
 using ToDoListDL.Repositories;
 
@@ -32,6 +33,7 @@ namespace ToDoListGUI
         {
             builder.Services.AddSingleton<LiteDBConnection>();
             builder.Services.AddTransient<IToDoRepository, LiteDBToDoRepository>();
+            builder.Services.AddTransient<ToDoService>();
         }
     }
 }
