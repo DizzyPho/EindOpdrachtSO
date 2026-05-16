@@ -33,7 +33,7 @@
                     <Border>
                         <HorizontalStackLayout>
                             <CheckBox Margin="8" 
-                                  IsChecked="{Binding IsComplete}"
+                                  IsChecked="{Binding IsCompleted}"
                                   VerticalOptions="Center"
                                   HorizontalOptions="Center"></CheckBox>
                             <VerticalStackLayout>
