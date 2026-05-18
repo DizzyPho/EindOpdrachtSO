@@ -5,6 +5,7 @@ using ToDoListBL.Interfaces;
 using ToDoListBL.Services;
 using ToDoListDL.Connections;
 using ToDoListDL.Repositories;
+using ToDoListGUI.Pages;
 using ToDoListGUI.Routes;
 using ToDoListGUI.Services;
 
@@ -27,7 +28,7 @@ namespace ToDoListGUI
                 ;
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
@@ -44,11 +45,16 @@ namespace ToDoListGUI
 
         public static MauiAppBuilder RegisterRoutes(this MauiAppBuilder builder)
         {
-            Routing.RegisterRoute(RouteDefinitions.TaskListRoute, RouteDefinitions.TaskListType);
-            Routing.RegisterRoute(RouteDefinitions.TaskDetailRoute, RouteDefinitions.TaskDetailType);
-            Routing.RegisterRoute(RouteDefinitions.UserListRoute, RouteDefinitions.UserListType);
-            Routing.RegisterRoute(RouteDefinitions.UserDetailRoute, RouteDefinitions.UserDetailType);
+            RegisterRoute<TaskListPage>();
+            RegisterRoute<TaskDetailPage>();
+            RegisterRoute<UserListPage>();
+            RegisterRoute<UserDetailPage>();
             return builder;
+        }
+        public static void RegisterRoute<T>()
+            where T : ContentPage
+        {
+            Routing.RegisterRoute(nameof(T), typeof(T));
         }
     }
 }
