@@ -21,16 +21,21 @@ namespace ToDoListGUI.ViewModels.TaskList
             _navigation = navigationService;
 
             NewTaskCommand = new Command(OnNewTask);
-            
+            ShowUsersCommand = new Command(OnShowUsers);            
         }
 
         public ObservableCollection<TaskViewModel> Tasks { get; }
         public ICommand NewTaskCommand { get; init; }
+        public ICommand ShowUsersCommand { get; init; }
 
         public void OnNewTask()
         {
             // task.run causes COMexception
             _navigation.GoToAsync<TaskDetailPage>();
+        }
+        public void OnShowUsers()
+        {
+            _navigation.GoToAsync<UserListPage>();
         }
     }
 }
