@@ -29,7 +29,7 @@ namespace ToDoListGUI.ViewModels.TaskList
         public void OnNewTask()
         {
             // task.run causes COMexception
-            _navigation.Navigate(RouteDefinitions.TaskDetailRoute);
+            _navigation.GoToAsync(RouteDefinitions.TaskDetailRoute);
         }
     }
 }

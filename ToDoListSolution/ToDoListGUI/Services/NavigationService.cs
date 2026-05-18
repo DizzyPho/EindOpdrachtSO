@@ -6,7 +6,7 @@ namespace ToDoListGUI.Services
 {
     public class NavigationService
     {
-        public async Task Navigate(string route, Dictionary<string, object>? parameters = null)
+        public async Task GoToAsync(string route, Dictionary<string, object>? parameters = null)
         {
             if (parameters == null)
             {
@@ -19,7 +19,7 @@ namespace ToDoListGUI.Services
         }
         public async Task GoBack(Dictionary<string, object>? parameters = null)
         {
-            await Navigate("..", parameters);
+            await GoToAsync("..", parameters);
         }
     }
 }
