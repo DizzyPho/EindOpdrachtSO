@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ToDoListGUI.Pages;
 
 namespace ToDoListGUI.Services
 {
@@ -22,6 +23,10 @@ namespace ToDoListGUI.Services
         public async Task GoBackAsync(Dictionary<string, object>? parameters = null)
         {
             await Shell.Current.GoToAsync("..", parameters);
+        }
+        public async Task NewUserPageAsync()
+        {
+            await GoToAsync<UserDetailPage>();
         }
     }
 }
