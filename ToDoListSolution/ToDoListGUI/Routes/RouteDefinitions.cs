@@ -15,6 +15,6 @@ namespace ToDoListGUI.Routes
         public static Type TaskDetailType = typeof(TaskDetailPage);
         public static Type TaskListType = typeof(TaskListPage);
         public static Type UserDetailType = typeof(UserDetailPage);
-        public static Type UserListType = typeof(UserDetailPage);
+        public static Type UserListType = typeof(UserListPage);
     }
 }
