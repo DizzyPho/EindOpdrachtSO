@@ -5,7 +5,7 @@ using ToDoListGUI.Pages;
 
 namespace ToDoListGUI.Routes
 {
-    public static class Routes
+    public static class RouteDefinitions
     {
         public const string TaskDetailRoute = "TaskDetailPage";
         public const string TaskListRoute= "TaskListPage";
