@@ -6,6 +6,7 @@ using ToDoListBL.Services;
 using ToDoListDL.Connections;
 using ToDoListDL.Repositories;
 using ToDoListGUI.Routes;
+using ToDoListGUI.Services;
 
 namespace ToDoListGUI
 {
@@ -37,6 +38,7 @@ namespace ToDoListGUI
             builder.Services.AddSingleton<LiteDBConnection>();
             builder.Services.AddTransient<IToDoRepository, LiteDBToDoRepository>();
             builder.Services.AddTransient<ToDoService>();
+            builder.Services.AddTransient<NavigationService>();
             return builder;
         }
 
