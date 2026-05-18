@@ -15,6 +15,7 @@
         <Button Margin="8" 
                 Grid.Row="1" 
                 Text="New User"
-                BackgroundColor="PaleVioletRed"></Button>
+                BackgroundColor="PaleVioletRed"
+                Command="{Binding NewUserCommand}"></Button>
     </Grid>
 </ContentPage>
