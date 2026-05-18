@@ -6,20 +6,21 @@ namespace ToDoListGUI.Services
 {
     public class NavigationService
     {
-        public async Task GoToAsync(string route, Dictionary<string, object>? parameters = null)
+        public async Task GoToAsync<T>(Dictionary<string, object>? parameters = null)
+            where T : ContentPage
         {
             if (parameters == null)
             {
-                await Shell.Current.GoToAsync(route);
+                await Shell.Current.GoToAsync(nameof(T));
             }
             else
             {
-                await Shell.Current.GoToAsync(route, parameters);
+                await Shell.Current.GoToAsync(nameof(T), parameters);
             }
         }
         public async Task GoBackAsync(Dictionary<string, object>? parameters = null)
         {
-            await GoToAsync("..", parameters);
+            await Shell.Current.GoToAsync("..", parameters);
         }
     }
 }

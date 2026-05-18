@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using ToDoListBL.Services;
+using ToDoListGUI.Pages;
 using ToDoListGUI.Routes;
 using ToDoListGUI.Services;
 
@@ -29,7 +30,7 @@ namespace ToDoListGUI.ViewModels.TaskList
         public void OnNewTask()
         {
             // task.run causes COMexception
-            _navigation.GoToAsync(RouteDefinitions.TaskDetailRoute);
+            _navigation.GoToAsync<TaskDetailPage>();
         }
     }
 }
