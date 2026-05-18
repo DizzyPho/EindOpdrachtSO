@@ -10,7 +10,7 @@
         </Grid.RowDefinitions>
         <VerticalStackLayout>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="PHOTO (URL)"></Label>
-            <Image Margin="8" Source="dotnet_bot.png"></Image>
+            <Image Margin="8" Source="dotnet_bot.png" MaximumHeightRequest="100" MaximumWidthRequest="100"></Image>
             <Entry Margin="8"></Entry>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="FIRST NAME"></Label>
             <Entry Margin="8"></Entry>
