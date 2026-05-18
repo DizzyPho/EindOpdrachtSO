@@ -22,6 +22,11 @@ namespace ToDoListDL.Repositories
             return _db.GetCollection<Todo>().FindAll().ToList();
         }
 
+        public User GetUserById(string id)
+        {
+            return _db.GetCollection<User>().FindById(id);
+        }
+
         public List<User> GetUsers()
         {
             return _db.GetCollection<User>().FindAll().ToList();

@@ -20,6 +20,11 @@ namespace ToDoListBL.Services
             return _repo.GetTasks();
         }
 
+        public User GetUserById(string id)
+        {
+            return _repo.GetUserById(id);
+        }
+
         public List<User> GetUsers()
         {
             return _repo.GetUsers();
