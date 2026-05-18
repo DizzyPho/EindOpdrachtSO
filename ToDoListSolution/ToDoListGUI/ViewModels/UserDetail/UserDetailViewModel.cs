@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using ToDoListBL.Domain;
 using ToDoListBL.Services;
 using ToDoListGUI.Services;
 
@@ -16,7 +17,9 @@ namespace ToDoListGUI.ViewModels.UserDetail
             _toDoService = toDoService;
             _navigation = navigationService;
             GoBackCommand = new Command(OnGoBack);
+            SaveCommand = new Command(OnSave);
         }
+        public string Id { get; init; }
         public string FirstName 
         {
             get => Get<String>(); 
@@ -39,6 +42,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
         }
         public bool DeleteEnabled { get; set; }
         public ICommand GoBackCommand { get; init; }
+        public ICommand SaveCommand { get; init; }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
@@ -54,6 +58,13 @@ namespace ToDoListGUI.ViewModels.UserDetail
 
         public void OnGoBack()
         {
+            _navigation.GoBackAsync();
+        }
+        public void OnSave()
+        {
+            // make new object or store one on creation of page?
+            User user = new User(FirstName, LastName, DateOfBirth, ImageUrl, Id);
+            _toDoService.Upsert(user);
             _navigation.GoBackAsync();
         }
     }
