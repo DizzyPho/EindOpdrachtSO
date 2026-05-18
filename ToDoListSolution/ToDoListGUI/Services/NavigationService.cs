@@ -22,7 +22,15 @@ namespace ToDoListGUI.Services
         }
         public async Task GoBackAsync(Dictionary<string, object>? parameters = null)
         {
-            await Shell.Current.GoToAsync("..", parameters);
+            // pass param like newly added user???
+            if (parameters == null)
+            {
+                await Shell.Current.GoToAsync("..");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync("..", parameters);
+            }
         }
         public async Task NewUserPageAsync()
         {
