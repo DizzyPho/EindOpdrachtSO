@@ -22,6 +22,11 @@ namespace ToDoListDL.Repositories
             return _db.GetCollection<Todo>().FindAll().ToList();
         }
 
+        public List<User> GetUsers()
+        {
+            return _db.GetCollection<User>().FindAll().ToList();
+        }
+
         public void UpdateTask(Todo todo)
         {
             _db.GetCollection<Todo>().Update(todo);
