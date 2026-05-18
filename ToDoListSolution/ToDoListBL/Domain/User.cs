@@ -7,16 +7,22 @@ namespace ToDoListBL.Domain
 {
     public class User
     {
-        public User(string id, string firstName, string lastName, DateTime birthDate, string pictureURL)
+        public User(string firstName, string lastName, DateTime birthDate, string pictureURL, string id = null)
         {
-            Id = id;
+
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
             PictureURL = pictureURL;
+            if (id != null)
+            {
+                Id = id;
+            }
+            else
+            {
+                Id = Guid.NewGuid().ToString();
+            }
         }
-        public User(string firstName, string lastName, DateTime birthDate, string pictureURL) 
-            : this(Guid.NewGuid().ToString(), firstName, lastName, birthDate, pictureURL) { }
 
         public string Id { get; init; }
         public string FirstName { get; init; }
