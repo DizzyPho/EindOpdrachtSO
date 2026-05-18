@@ -8,6 +8,7 @@ using ToDoListDL.Repositories;
 using ToDoListGUI.Pages;
 using ToDoListGUI.Routes;
 using ToDoListGUI.Services;
+using ToDoListGUI.ViewModels.UserDetail;
 
 namespace ToDoListGUI
 {
@@ -40,6 +41,8 @@ namespace ToDoListGUI
             builder.Services.AddTransient<IToDoRepository, LiteDBToDoRepository>();
             builder.Services.AddTransient<ToDoService>();
             builder.Services.AddTransient<NavigationService>();
+
+            builder.Services.AddTransient<UserDetailViewModel>();
             return builder;
         }
 
