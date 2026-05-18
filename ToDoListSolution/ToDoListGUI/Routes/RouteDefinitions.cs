@@ -7,10 +7,10 @@ namespace ToDoListGUI.Routes
 {
     public static class RouteDefinitions
     {
-        public const string TaskDetailRoute = "TaskDetailPage";
-        public const string TaskListRoute= "TaskListPage";
-        public const string UserDetailRoute = "UserDetailPage";
-        public const string UserListRoute = "UserListPage";
+        public static string TaskDetailRoute = nameof(TaskDetailPage);
+        public static string TaskListRoute= nameof(TaskListPage);
+        public static string UserDetailRoute = nameof(UserDetailPage);
+        public static string UserListRoute = nameof(UserListPage);
 
         public static Type TaskDetailType = typeof(TaskDetailPage);
         public static Type TaskListType = typeof(TaskListPage);
