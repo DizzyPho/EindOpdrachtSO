@@ -17,7 +17,7 @@ namespace ToDoListGUI.Services
                 await Shell.Current.GoToAsync(route, parameters);
             }
         }
-        public async Task GoBack(Dictionary<string, object>? parameters = null)
+        public async Task GoBackAsync(Dictionary<string, object>? parameters = null)
         {
             await GoToAsync("..", parameters);
         }
