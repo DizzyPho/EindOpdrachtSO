@@ -16,7 +16,7 @@ namespace ToDoListGUI.ViewModels.UserList
             var diff = (DateTime.Now - user.BirthDate);
             Age = user.GetAge();
         }
-        public int Id { get; init; }
+        public string Id { get; init; }
         public string FirstName
         {
             get => Get<string>();
