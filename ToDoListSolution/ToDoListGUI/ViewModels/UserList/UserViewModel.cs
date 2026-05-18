@@ -9,13 +9,14 @@ namespace ToDoListGUI.ViewModels.UserList
     {
         public UserViewModel(User user)
         {
+            Id = user.Id;
             FirstName = user.FirstName;
             LastName = user.LastName;
             // possible to make age int and format 
             var diff = (DateTime.Now - user.BirthDate);
             Age = user.GetAge();
         }
-
+        public int Id { get; init; }
         public string FirstName
         {
             get => Get<string>();
