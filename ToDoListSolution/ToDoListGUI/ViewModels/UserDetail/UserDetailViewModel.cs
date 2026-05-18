@@ -6,10 +6,15 @@ using ToDoListGUI.Services;
 
 namespace ToDoListGUI.ViewModels.UserDetail
 {
-    public class UserDetailViewModel : BaseViewModel
+    public class UserDetailViewModel : BaseViewModel, IQueryAttributable
     {
         NavigationService _navigation;
         ToDoService _toDoService;
+        public UserDetailViewModel(ToDoService toDoService, NavigationService navigationService)
+        {
+            _toDoService = toDoService;
+            _navigation = navigationService;
+        }
         public string FirstName 
         {
             get => Get<String>(); 
@@ -30,15 +35,13 @@ namespace ToDoListGUI.ViewModels.UserDetail
             get => Get<DateTime>();
             set => Set(value);
         }
-        public UserDetailViewModel(string id, ToDoService toDoService, NavigationService navigationService) 
-            : this(toDoService, navigationService)
-        {
-        }
 
-        public UserDetailViewModel(ToDoService toDoService, NavigationService navigationService)
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            _toDoService = toDoService;
-            _navigation = navigationService;
+            if (query.TryGetValue("id", out object oId) && oId is string id)
+            {
+
+            }
         }
     }
 }
