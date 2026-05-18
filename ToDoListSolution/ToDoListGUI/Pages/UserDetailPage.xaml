@@ -10,18 +10,21 @@
         </Grid.RowDefinitions>
         <VerticalStackLayout>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="PHOTO (URL)"></Label>
-            <Image Margin="8" Source="dotnet_bot.png" MaximumHeightRequest="100" MaximumWidthRequest="100"></Image>
-            <Entry Margin="8"></Entry>
+            <Image Margin="8" Source="{Binding ImageUrl}" MaximumHeightRequest="100" MaximumWidthRequest="100"></Image>
+            <Entry Margin="8" Text="{Binding ImageUrl}"></Entry>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="FIRST NAME"></Label>
-            <Entry Margin="8"></Entry>
+            <Entry Margin="8" Text="{Binding FirstName}"></Entry>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="LAST NAME"></Label>
-            <Entry Margin="8"></Entry>
+            <Entry Margin="8" Text="{Binding LastName}"></Entry>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="DATE OF BIRTH"></Label>
-            <DatePicker Margin="8"></DatePicker>
+            <DatePicker Margin="8" Date="{Binding DateOfBirth}"></DatePicker>
         </VerticalStackLayout>
-        <Button Margin="8" Grid.Row="1" Grid.Column="0" Text="Cancel" BackgroundColor="IndianRed"></Button>
-        <Button Margin="8" Grid.Row="1" Grid.Column="1" Text="Save" BackgroundColor="PaleGreen"></Button>
-        <Button Margin="8" Grid.Row="1" Grid.Column="2" Text="Delete" BackgroundColor="PaleVioletRed"></Button>
+        <HorizontalStackLayout Grid.Row="1" Grid.Column="0">
+            <Button Margin="8" Text="Cancel" BackgroundColor="IndianRed" Command="{Binding GoBackCommand}"></Button>
+            <Button Margin="8" Text="Save" BackgroundColor="PaleGreen"></Button>
+            <Button Margin="8" Text="Delete" BackgroundColor="PaleVioletRed"></Button>
+        </HorizontalStackLayout >
+
     </Grid>
 
 </ContentPage>
