@@ -9,13 +9,14 @@ namespace ToDoListGUI.Services
         public async Task GoToAsync<T>(Dictionary<string, object>? parameters = null)
             where T : ContentPage
         {
+            string name = typeof(T).Name;
             if (parameters == null)
             {
-                await Shell.Current.GoToAsync(nameof(T));
+                await Shell.Current.GoToAsync(name);
             }
             else
             {
-                await Shell.Current.GoToAsync(nameof(T), parameters);
+                await Shell.Current.GoToAsync(name, parameters);
             }
         }
         public async Task GoBackAsync(Dictionary<string, object>? parameters = null)

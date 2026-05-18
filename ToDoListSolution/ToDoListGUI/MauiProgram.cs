@@ -54,7 +54,9 @@ namespace ToDoListGUI
         public static void RegisterRoute<T>()
             where T : ContentPage
         {
-            Routing.RegisterRoute(nameof(T), typeof(T));
+            Type type = typeof(T);
+            string name = type.Name;
+            Routing.RegisterRoute(name, type);
         }
     }
 }
