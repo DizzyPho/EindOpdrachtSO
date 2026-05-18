@@ -36,5 +36,11 @@ namespace ToDoListGUI.Services
         {
             await GoToAsync<UserDetailPage>();
         }
+
+        public async Task EditUserPage(string userId)
+        {
+            Dictionary<string, object>? parameters = new Dictionary<string, object>{ ["id"] = userId };
+            await GoToAsync<UserDetailPage>(parameters);
+        }
     }
 }
