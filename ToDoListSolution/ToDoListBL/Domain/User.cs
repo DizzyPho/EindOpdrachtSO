@@ -34,9 +34,9 @@ namespace ToDoListBL.Domain
         public int GetAge()
         {
             DateTime now = DateTime.Now;
-            return (BirthDate.Year - now.Year - 1) +
-                    (((BirthDate.Month > now.Month) ||
-                    ((BirthDate.Month == now.Month) && (BirthDate.Day >= now.Day))) ? 1 : 0);
+            return (now.Year - BirthDate.Year - 1) +
+                    (((now.Month > BirthDate.Month) ||
+                    ((now.Month == BirthDate.Month) && (now.Day >= BirthDate.Day))) ? 1 : 0);
         }
     }
 }
