@@ -5,7 +5,7 @@ using ToDoListGUI.ViewModels.TaskList;
 
 namespace ToDoListGUI.Pages
 {
-    public partial class TaskListPage : ContentPage
+    public partial class TaskListPage : ContentPage, IQueryAttributable
     {
         
         public TaskListPage(ToDoService toDoService, NavigationService navigation)
@@ -14,5 +14,9 @@ namespace ToDoListGUI.Pages
             BindingContext = new TaskListViewModel(toDoService, navigation);
         }
 
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            
+        }
     }
 }
