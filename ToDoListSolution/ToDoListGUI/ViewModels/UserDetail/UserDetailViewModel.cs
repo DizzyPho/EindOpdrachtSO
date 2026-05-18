@@ -37,13 +37,18 @@ namespace ToDoListGUI.ViewModels.UserDetail
             get => Get<DateTime>();
             set => Set(value);
         }
+        public bool DeleteEnabled { get; set; }
         public ICommand GoBackCommand { get; init; }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.TryGetValue("id", out object oId) && oId is string id)
             {
-
+                DeleteEnabled = true;
+            }
+            else
+            {
+                DeleteEnabled = false;
             }
         }
 
