@@ -21,7 +21,7 @@
         </VerticalStackLayout>
         <HorizontalStackLayout Grid.Row="1" Grid.Column="0">
             <Button Margin="8" Text="Cancel" BackgroundColor="IndianRed" Command="{Binding GoBackCommand}"></Button>
-            <Button Margin="8" Text="Save" BackgroundColor="PaleGreen"></Button>
+            <Button Margin="8" Text="Save" BackgroundColor="PaleGreen" Command="{Binding SaveCommand}"></Button>
             <Button Margin="8" Text="Delete" BackgroundColor="PaleVioletRed" IsVisible="{Binding DeleteEnabled}"></Button>
         </HorizontalStackLayout >
 
