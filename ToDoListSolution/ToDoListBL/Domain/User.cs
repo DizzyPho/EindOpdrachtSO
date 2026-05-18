@@ -7,7 +7,7 @@ namespace ToDoListBL.Domain
 {
     public class User
     {
-        public User(int id, string firstName, string lastName, DateTime birthDate, string pictureURL)
+        public User(string id, string firstName, string lastName, DateTime birthDate, string pictureURL)
         {
             Id = id;
             FirstName = firstName;
@@ -15,7 +15,10 @@ namespace ToDoListBL.Domain
             BirthDate = birthDate;
             PictureURL = pictureURL;
         }
-        public int Id { get; init; }
+        public User(string firstName, string lastName, DateTime birthDate, string pictureURL) 
+            : this(Guid.NewGuid().ToString(), firstName, lastName, birthDate, pictureURL) { }
+
+        public string Id { get; init; }
         public string FirstName { get; init; }
         public string LastName { get; init; }
         public DateTime BirthDate { get; init; }
