@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using ToDoListBL.Services;
 using ToDoListGUI.Services;
 
@@ -14,6 +15,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
         {
             _toDoService = toDoService;
             _navigation = navigationService;
+            GoBackCommand = new Command(OnGoBack);
         }
         public string FirstName 
         {
@@ -35,6 +37,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
             get => Get<DateTime>();
             set => Set(value);
         }
+        public ICommand GoBackCommand { get; init; }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
@@ -42,6 +45,11 @@ namespace ToDoListGUI.ViewModels.UserDetail
             {
 
             }
+        }
+
+        public void OnGoBack()
+        {
+            _navigation.GoBackAsync();
         }
     }
 }
