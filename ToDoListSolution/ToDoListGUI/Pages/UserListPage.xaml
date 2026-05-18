@@ -13,7 +13,7 @@
                         ItemsSource="{Binding Users}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Padding="16">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
@@ -22,19 +22,16 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Margin="8" 
-                               Grid.Row="0"
+                        <Label Grid.Row="0"
                                Grid.Column="0"
                                Text="{Binding FirstName}"
                                FontAttributes="Bold">
                         </Label>
-                        <Label Margin="8,2" 
-                               Grid.Row="1"
+                        <Label Grid.Row="1"
                                Grid.Column="0"
                                Text="{Binding LastName}">
                         </Label>
-                        <Label Margin="8,2"
-                               Grid.RowSpan="2"
+                        <Label Grid.RowSpan="2"
                                Grid.Column="1"
                                Text="{Binding Age, StringFormat='{0} jaar'}">
                         </Label>
