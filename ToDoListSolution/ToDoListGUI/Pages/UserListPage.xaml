@@ -10,7 +10,9 @@
         </Grid.RowDefinitions>
         <CollectionView Margin="8" 
                         Grid.Row="0"
-                        ItemsSource="{Binding Users}">
+                        ItemsSource="{Binding Users}"
+                        SelectedItem="{Binding SelectedUser}"
+                        SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="16">

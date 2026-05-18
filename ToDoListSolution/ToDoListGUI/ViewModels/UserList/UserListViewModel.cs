@@ -14,6 +14,19 @@ namespace ToDoListGUI.ViewModels.UserList
         NavigationService _navigation;
 
         public ObservableCollection<UserViewModel> Users { get; init; }
+        public UserViewModel SelectedUser
+        {
+            get => Get<UserViewModel>();
+            set
+            {
+                Set(value);
+                if(value != null)
+                {
+                    OnUserClicked(value);
+                    SelectedUser = null;
+                }
+            }
+        }
         public UserListViewModel(ToDoService toDoService, NavigationService navigationService) 
         {
             _toDoService = toDoService;
@@ -27,6 +40,10 @@ namespace ToDoListGUI.ViewModels.UserList
         public void OnNewUser()
         {
             _navigation.NewUserPageAsync();
+        }
+        public void OnUserClicked(UserViewModel user)
+        {
+            _navigation.EditUserPage(user.Id);
         }
     }
 }

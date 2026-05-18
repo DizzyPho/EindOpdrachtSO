@@ -19,7 +19,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
             GoBackCommand = new Command(OnGoBack);
             SaveCommand = new Command(OnSave);
         }
-        public string Id { get; init; }
+        public string Id { get; private set; }
         public string FirstName 
         {
             get => Get<String>(); 
@@ -48,6 +48,12 @@ namespace ToDoListGUI.ViewModels.UserDetail
         {
             if (query.TryGetValue("id", out object oId) && oId is string id)
             {
+                User user = _toDoService.GetUserById(id);
+                FirstName = user.FirstName;
+                LastName = user.LastName;
+                DateOfBirth = user.BirthDate;
+                ImageUrl = user.PictureURL;
+                Id = user.Id;
                 DeleteEnabled = true;
             }
             else
