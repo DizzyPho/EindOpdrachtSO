@@ -48,7 +48,6 @@ namespace ToDoListGUI
 
         public static MauiAppBuilder RegisterRoutes(this MauiAppBuilder builder)
         {
-            RegisterRoute<TaskListPage>();
             RegisterRoute<TaskDetailPage>();
             RegisterRoute<UserListPage>();
             RegisterRoute<UserDetailPage>();
