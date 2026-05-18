@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,5 +20,14 @@ namespace ToDoListBL.Domain
         public string LastName { get; init; }
         public DateTime BirthDate { get; init; }
         public string PictureURL { get; init; }
+
+        // method from https://stackoverflow.com/questions/4127363/date-difference-in-years-using-c-sharp
+        public int GetAge()
+        {
+            DateTime now = DateTime.Now;
+            return (BirthDate.Year - now.Year - 1) +
+                    (((BirthDate.Month > now.Month) ||
+                    ((BirthDate.Month == now.Month) && (BirthDate.Day >= now.Day))) ? 1 : 0);
+        }
     }
 }
