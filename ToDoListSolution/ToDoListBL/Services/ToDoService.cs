@@ -47,6 +47,7 @@ namespace ToDoListBL.Services
         public void SaveNewUser(User user)
         {
             _repo.Upsert(user);
+            _messageService.Send<NewUserMessage>(new NewUserMessage(user));
         }
     }
 }

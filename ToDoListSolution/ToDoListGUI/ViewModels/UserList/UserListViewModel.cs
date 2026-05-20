@@ -57,6 +57,7 @@ namespace ToDoListGUI.ViewModels.UserList
         public void RegisterMessages()
         {
             _messageService.Register<UserUpdatedMessage>(this, (sender, message) => OnUserUpdated(message.User));
+            _messageService.Register<NewUserMessage>(this, (sender, message) => Users.Add(new UserViewModel(message.NewUser)));
         }
 
         public void OnUserUpdated(User user)
