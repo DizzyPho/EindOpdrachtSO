@@ -13,7 +13,7 @@ namespace ToDoListBL.Domain
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
-            PictureURL = pictureURL;
+            ImageURL = pictureURL;
             if (id != null)
             {
                 Id = id;
@@ -28,7 +28,7 @@ namespace ToDoListBL.Domain
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public string PictureURL { get; set; }
+        public string ImageURL { get; set; }
 
         // method from https://stackoverflow.com/questions/4127363/date-difference-in-years-using-c-sharp
         public int GetAge()
