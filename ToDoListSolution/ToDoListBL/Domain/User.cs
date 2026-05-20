@@ -24,11 +24,11 @@ namespace ToDoListBL.Domain
             }
         }
 
-        public string Id { get; init; }
-        public string FirstName { get; init; }
-        public string LastName { get; init; }
-        public DateTime BirthDate { get; init; }
-        public string PictureURL { get; init; }
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string PictureURL { get; set; }
 
         // method from https://stackoverflow.com/questions/4127363/date-difference-in-years-using-c-sharp
         public int GetAge()
