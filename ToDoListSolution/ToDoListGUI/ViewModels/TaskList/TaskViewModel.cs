@@ -18,9 +18,10 @@ namespace ToDoListGUI.ViewModels.TaskList
             Title = todo.Title;
             Description = todo.Description;
             IsCompleted = todo.IsCompleted;
+            Id = todo.Id;
             IsInitPhase = false;
         }
-
+        public string Id { get; init; }
         public bool IsCompleted
         {
             get => Get<bool>();
