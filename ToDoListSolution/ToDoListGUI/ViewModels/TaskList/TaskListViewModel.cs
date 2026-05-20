@@ -65,10 +65,14 @@ namespace ToDoListGUI.ViewModels.TaskList
 
         public void OnTaskUpdated(Todo task)
         {
-            TaskViewModel taskVM = Tasks.First(vm => task.Id == vm.Id);
-            taskVM.Title = task.Title;
-            taskVM.Description = task.Description;
-            taskVM.IsCompleted = task.IsCompleted;
+            TaskViewModel taskVM = Tasks.First<TaskViewModel>(vm => task.Id == vm.Id);
+
+            if(taskVM != null)
+            {
+                taskVM.Title = task.Title;
+                taskVM.Description = task.Description;
+                taskVM.IsCompleted = task.IsCompleted;
+            }
         }
 
         public void OnNewTask(Todo task)
