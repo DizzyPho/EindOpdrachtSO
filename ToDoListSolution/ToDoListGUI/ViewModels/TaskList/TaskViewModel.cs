@@ -40,7 +40,7 @@ namespace ToDoListGUI.ViewModels.TaskList
             if(!IsInitPhase)
             {
                 Todo.IsCompleted = value;
-                _toDoService.UpdateTask(Todo);
+                _toDoService.UpdateTaskCompleted(Todo);
             }
         }
     }

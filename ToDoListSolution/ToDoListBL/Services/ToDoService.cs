@@ -33,9 +33,14 @@ namespace ToDoListBL.Services
             return _repo.GetUsers();
         }
 
+        public void UpdateTaskCompleted(Todo todo)
+        {
+            _repo.Upsert(todo);
+        }
         public void UpdateTask(Todo todo)
         {
             _repo.Upsert(todo);
+            _messageService.Send<TaskUpdatedMessage>(new TaskUpdatedMessage(todo));
         }
 
         public void UpdateUser(User user)

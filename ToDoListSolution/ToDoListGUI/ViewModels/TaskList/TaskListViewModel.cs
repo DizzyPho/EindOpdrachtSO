@@ -29,6 +29,7 @@ namespace ToDoListGUI.ViewModels.TaskList
             ShowUsersCommand = new AsyncCommand(OnShowUsers);
 
             messageService.Register<NewTaskMessage>(this, (o, message) => OnNewTask(message.NewTask));
+            messageService.Register<TaskUpdatedMessage>(this, (o, message) => OnTaskUpdated(message.UpdatedTask));
 
         }
 
