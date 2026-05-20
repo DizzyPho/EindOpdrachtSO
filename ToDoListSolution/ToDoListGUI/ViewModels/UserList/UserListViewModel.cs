@@ -25,7 +25,7 @@ namespace ToDoListGUI.ViewModels.UserList
                 Set(value);
                 if(value != null)
                 {
-                    OnUserClicked(value);
+                    OnUserClicked(value).ConfigureAwait(false);
                     SelectedUser = null;
                 }
             }
