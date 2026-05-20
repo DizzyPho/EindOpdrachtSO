@@ -25,6 +25,6 @@
             <CheckBox Margin="8" IsChecked="{Binding IsCompleted}"></CheckBox>
         </VerticalStackLayout>
         <Button Margin="8" Grid.Row="1" Grid.Column="0" Text="Cancel" BackgroundColor="IndianRed" Command="{Binding GoBackCommand}"></Button>
-        <Button Margin="8" Grid.Row="1" Grid.Column="1" Text="Save" BackgroundColor="PaleGreen"></Button>
+        <Button Margin="8" Grid.Row="1" Grid.Column="1" Text="Save" BackgroundColor="PaleGreen" Command="{Binding SaveCommand}"></Button>
     </Grid>
 </ContentPage>

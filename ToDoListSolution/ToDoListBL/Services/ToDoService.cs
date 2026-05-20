@@ -50,9 +50,9 @@ namespace ToDoListBL.Services
             _messageService.Send<NewUserMessage>(new NewUserMessage(user));
         }
 
-        public void SaveNewTask(Todo currentTask)
+        public void SaveNewTask(Todo task)
         {
-            _repo.Upsert()
+            _repo.Upsert(task);
         }
     }
 }

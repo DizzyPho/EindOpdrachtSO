@@ -28,6 +28,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             UserNames = new List<UserNameViewModel>(users.Select(user => new UserNameViewModel(user)));
 
             GoBackCommand = new AsyncCommand(OnGoBack);
+            SaveCommand = new AsyncCommand(OnSave);
         }
 
         public string Title
@@ -46,6 +47,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             set => Set(value);
         }
         public ICommand GoBackCommand { get; init; }
+        public ICommand SaveCommand { get; init; }
         public List<UserNameViewModel> UserNames { get; init; }
         public UserNameViewModel SelectedUser
         {
@@ -67,6 +69,16 @@ namespace ToDoListGUI.ViewModels.TaskDetail
 
         public async Task OnGoBack()
         {
+            await _navigationService.GoBackAsync();
+        }
+        public async Task OnSave()
+        {
+            if(State == PageState.AddNew)
+            {
+                _currentTask = new Todo(Title, Description, IsCompleted, SelectedUser.Id);
+                _toDoService.SaveNewTask(_currentTask);
+            }
+
             await _navigationService.GoBackAsync();
         }
     }
