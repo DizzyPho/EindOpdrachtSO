@@ -20,22 +20,22 @@ namespace ToDoListGUI.ViewModels.TaskList
                                             .Select(todo => new TaskViewModel(todo, toDoService)));
             _navigation = navigationService;
 
-            NewTaskCommand = new Command(OnNewTask);
-            ShowUsersCommand = new Command(OnShowUsers);            
+            NewTaskCommand = new Command(async () => await OnNewTask());
+            ShowUsersCommand = new Command(async () => await OnShowUsers());            
         }
 
         public ObservableCollection<TaskViewModel> Tasks { get; }
         public ICommand NewTaskCommand { get; init; }
         public ICommand ShowUsersCommand { get; init; }
 
-        public void OnNewTask()
+        public async Task OnNewTask()
         {
             // task.run causes COMexception
-            _navigation.GoToAsync<TaskDetailPage>();
+            await _navigation.GoToAsync<TaskDetailPage>();
         }
-        public void OnShowUsers()
+        public async Task OnShowUsers()
         {
-            _navigation.GoToAsync<UserListPage>();
+            await _navigation.GoToAsync<UserListPage>();
         }
     }
 }

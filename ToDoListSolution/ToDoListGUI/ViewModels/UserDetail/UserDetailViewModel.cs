@@ -16,8 +16,8 @@ namespace ToDoListGUI.ViewModels.UserDetail
         {
             _toDoService = toDoService;
             _navigation = navigationService;
-            GoBackCommand = new Command(OnGoBack);
-            SaveCommand = new Command(OnSave);
+            GoBackCommand = new Command(async() => await OnGoBack());
+            SaveCommand = new Command(async () => await OnSave());
         }
         public string Id { get; private set; }
         public string FirstName 
@@ -62,16 +62,16 @@ namespace ToDoListGUI.ViewModels.UserDetail
             }
         }
 
-        public void OnGoBack()
+        public async Task OnGoBack()
         {
-            _navigation.GoBackAsync();
+            await _navigation.GoBackAsync();
         }
-        public void OnSave()
+        public async Task OnSave()
         {
             // make new object or store one on creation of page?
             User user = new User(FirstName, LastName, DateOfBirth, ImageUrl, Id);
             _toDoService.Upsert(user);
-            _navigation.GoBackAsync();
+            await _navigation.GoBackAsync();
         }
     }
 }
