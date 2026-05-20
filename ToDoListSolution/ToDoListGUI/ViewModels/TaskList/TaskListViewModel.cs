@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using ToDoListBL.Domain;
+using ToDoListBL.Messages;
 using ToDoListBL.Services;
 using ToDoListGUI.Commands;
 using ToDoListGUI.Pages;
@@ -14,17 +16,20 @@ namespace ToDoListGUI.ViewModels.TaskList
     public class TaskListViewModel : BaseViewModel
     {
         NavigationService _navigation;
-        public TaskListViewModel(ToDoService toDoService, NavigationService navigationService)
+        ToDoService _toDoService;
+        public TaskListViewModel(ToDoService toDoService, NavigationService navigationService, MessageService messageService)
         {
             Tasks = new ObservableCollection<TaskViewModel>(
                                             toDoService.GetTasks()
                                             .Select(todo => new TaskViewModel(todo, toDoService)));
             _navigation = navigationService;
+            _toDoService = toDoService;
 
             NewTaskCommand = new AsyncCommand(OnNewTask);
-            ShowUsersCommand = new AsyncCommand(OnShowUsers);            
+            ShowUsersCommand = new AsyncCommand(OnShowUsers);
 
             messageService.Register<NewTaskMessage>(this, (o, message) => OnNewTask(message.NewTask));
+
         }
 
         public ObservableCollection<TaskViewModel> Tasks { get; }
