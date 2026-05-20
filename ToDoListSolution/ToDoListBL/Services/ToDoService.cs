@@ -54,5 +54,10 @@ namespace ToDoListBL.Services
         {
             _repo.Upsert(task);
         }
+
+        public Todo GetTaskById(string id)
+        {
+            return _repo.GetTaskById(id);
+        }
     }
 }

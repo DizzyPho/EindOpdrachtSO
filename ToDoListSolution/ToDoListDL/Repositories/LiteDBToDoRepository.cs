@@ -15,7 +15,12 @@ namespace ToDoListDL.Repositories
         public LiteDBToDoRepository(LiteDBConnection db)
         {
             _db = db;
-        }    
+        }
+
+        public Todo GetTaskById(string id)
+        {
+            return _db.GetCollection<Todo>().FindById(id);
+        }
 
         public List<Todo> GetTasks()
         {

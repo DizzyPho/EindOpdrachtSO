@@ -7,6 +7,7 @@ namespace ToDoListBL.Interfaces
 {
     public interface IToDoRepository
     {
+        Todo GetTaskById(string id);
         public List<Todo> GetTasks();
         User GetUserById(string id);
         List<User> GetUsers();

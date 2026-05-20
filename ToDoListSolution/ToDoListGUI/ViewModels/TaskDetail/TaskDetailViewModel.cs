@@ -59,7 +59,11 @@ namespace ToDoListGUI.ViewModels.TaskDetail
         {
             if(query.TryGetValue("id", out object oId) && oId is string id)
             {
-
+                _currentTask = _toDoService.GetTaskById(id);
+                Title = _currentTask.Title;
+                Description = _currentTask.Description;
+                IsCompleted = _currentTask.IsCompleted;
+                SelectedUser = UserNames.First(user => user.Id == _currentTask.ResponsibleUserId);
             }
             else
             {
