@@ -18,7 +18,8 @@
             <Label Margin="8" Text="DESCRIPTION" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
             <Entry Margin="8" Text="{Binding Description}"></Entry>
             <Label Margin="8" Text="USER" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
-            <Picker Margin="8" ItemsSource="{Binding UserNames}" SelectedItem="{Binding SelectedUser}">
+            <Picker Margin="8" ItemsSource="{Binding UserNames}" SelectedItem="{Binding SelectedUser}"
+                    ItemDisplayBinding="{Binding UserName}">
                 
             </Picker>
             <Label Margin="8" Text="COMPLETED?" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>

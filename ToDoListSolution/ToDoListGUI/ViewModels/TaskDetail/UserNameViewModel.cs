@@ -15,10 +15,5 @@ namespace ToDoListGUI.ViewModels.TaskDetail
 
         public string Id { get; init; }
         public string UserName { get; init; }
-
-        public override string? ToString()
-        {
-            return UserName;
-        }
     }
 }
