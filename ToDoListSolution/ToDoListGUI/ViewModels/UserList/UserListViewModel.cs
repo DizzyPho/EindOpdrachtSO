@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using ToDoListBL.Domain;
+using ToDoListBL.Messages;
 using ToDoListBL.Services;
 using ToDoListGUI.Services;
 
@@ -12,6 +14,7 @@ namespace ToDoListGUI.ViewModels.UserList
     {
         ToDoService _toDoService;
         NavigationService _navigation;
+        MessageService _messageService;
 
         public ObservableCollection<UserViewModel> Users { get; init; }
         public UserViewModel SelectedUser
@@ -27,23 +30,45 @@ namespace ToDoListGUI.ViewModels.UserList
                 }
             }
         }
-        public UserListViewModel(ToDoService toDoService, NavigationService navigationService) 
+        public UserListViewModel(ToDoService toDoService, NavigationService navigationService, MessageService messageService) 
         {
             _toDoService = toDoService;
             _navigation = navigationService;
+            _messageService = messageService;
+
+            RegisterMessages();
+
             var userList = _toDoService.GetUsers();
             Users = new ObservableCollection<UserViewModel>(userList.Select(user => new UserViewModel(user)));
 
-            NewUserCommand = new Command(OnNewUser);
+            NewUserCommand = new Command(async () => await OnNewUser());
         }
         public ICommand NewUserCommand { get; init; }
-        public void OnNewUser()
+        public async Task OnNewUser()
         {
-            _navigation.NewUserPageAsync();
+            await _navigation.NewUserPageAsync();
         }
-        public void OnUserClicked(UserViewModel user)
+        public async Task OnUserClicked(UserViewModel user)
         {
-            _navigation.EditUserPage(user.Id);
+            await _navigation.EditUserPage(user.Id);
+        }
+
+        public void RegisterMessages()
+        {
+            _messageService.Register<UserUpdatedMessage>(this, (sender, message) => OnUserUpdated(message.User));
+        }
+
+        public void OnUserUpdated(User user)
+        {
+            UserViewModel userVM = Users.First<UserViewModel>(viewmodel => viewmodel.Id == user.Id);
+
+            if (userVM != null)
+            {
+                userVM.FirstName = user.FirstName;
+                userVM.LastName = user.LastName;
+                userVM.Age = user.GetAge();
+            }
+
         }
     }
 }
