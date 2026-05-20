@@ -6,6 +6,7 @@ using System.Windows.Input;
 using ToDoListBL.Domain;
 using ToDoListBL.Messages;
 using ToDoListBL.Services;
+using ToDoListGUI.Commands;
 using ToDoListGUI.Services;
 
 namespace ToDoListGUI.ViewModels.UserList
@@ -41,7 +42,7 @@ namespace ToDoListGUI.ViewModels.UserList
             var userList = _toDoService.GetUsers();
             Users = new ObservableCollection<UserViewModel>(userList.Select(user => new UserViewModel(user)));
 
-            NewUserCommand = new Command(async () => await OnNewUser());
+            NewUserCommand = new AsyncCommand(OnNewUser);
         }
         public ICommand NewUserCommand { get; init; }
         public async Task OnNewUser()

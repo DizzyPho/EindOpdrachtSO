@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Input;
 using ToDoListBL.Domain;
 using ToDoListBL.Services;
+using ToDoListGUI.Commands;
 using ToDoListGUI.Services;
 
 namespace ToDoListGUI.ViewModels.UserDetail
@@ -16,8 +17,8 @@ namespace ToDoListGUI.ViewModels.UserDetail
         {
             _toDoService = toDoService;
             _navigation = navigationService;
-            GoBackCommand = new Command(async() => await OnGoBack());
-            SaveCommand = new Command(async () => await OnSave());
+            GoBackCommand = new AsyncCommand(OnGoBack);
+            SaveCommand = new AsyncCommand(OnSave);
         }
         public string Id { get; private set; }
         public string FirstName 

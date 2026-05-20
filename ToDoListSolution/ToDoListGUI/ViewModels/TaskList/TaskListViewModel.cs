@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using ToDoListBL.Services;
+using ToDoListGUI.Commands;
 using ToDoListGUI.Pages;
 using ToDoListGUI.Routes;
 using ToDoListGUI.Services;
@@ -20,8 +21,8 @@ namespace ToDoListGUI.ViewModels.TaskList
                                             .Select(todo => new TaskViewModel(todo, toDoService)));
             _navigation = navigationService;
 
-            NewTaskCommand = new Command(async () => await OnNewTask());
-            ShowUsersCommand = new Command(async () => await OnShowUsers());            
+            NewTaskCommand = new AsyncCommand(OnNewTask);
+            ShowUsersCommand = new AsyncCommand(OnShowUsers);            
         }
 
         public ObservableCollection<TaskViewModel> Tasks { get; }
@@ -30,7 +31,6 @@ namespace ToDoListGUI.ViewModels.TaskList
 
         public async Task OnNewTask()
         {
-            // task.run causes COMexception
             await _navigation.GoToAsync<TaskDetailPage>();
         }
         public async Task OnShowUsers()
