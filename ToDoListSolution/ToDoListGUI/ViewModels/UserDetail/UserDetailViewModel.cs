@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 using ToDoListBL.Domain;
 using ToDoListBL.Services;
 using ToDoListGUI.Commands;
+using ToDoListGUI.PageStates;
 using ToDoListGUI.Services;
 
 namespace ToDoListGUI.ViewModels.UserDetail
@@ -13,6 +15,8 @@ namespace ToDoListGUI.ViewModels.UserDetail
     {
         NavigationService _navigation;
         ToDoService _toDoService;
+        User _currentUser;
+        public PageState State { get; set; }
         public UserDetailViewModel(ToDoService toDoService, NavigationService navigationService)
         {
             _toDoService = toDoService;
@@ -21,10 +25,10 @@ namespace ToDoListGUI.ViewModels.UserDetail
             SaveCommand = new AsyncCommand(OnSave);
         }
         public string Id { get; private set; }
-        public string FirstName 
+        public string FirstName
         {
-            get => Get<String>(); 
-            set => Set(value); 
+            get => Get<String>();
+            set => Set(value);
         }
         public string LastName
         {
@@ -43,23 +47,25 @@ namespace ToDoListGUI.ViewModels.UserDetail
         }
         public bool DeleteEnabled { get; set; }
         public ICommand GoBackCommand { get; init; }
-        public ICommand SaveCommand { get; init; }
+        public ICommand SaveCommand { get; private set; }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.TryGetValue("id", out object oId) && oId is string id)
             {
-                User user = _toDoService.GetUserById(id);
-                FirstName = user.FirstName;
-                LastName = user.LastName;
-                DateOfBirth = user.BirthDate;
-                ImageUrl = user.PictureURL;
-                Id = user.Id;
+                _currentUser = _toDoService.GetUserById(id);
+                FirstName = _currentUser.FirstName;
+                LastName = _currentUser.LastName;
+                DateOfBirth = _currentUser.BirthDate;
+                ImageUrl = _currentUser.ImageURL;
+                Id = _currentUser.Id;
+                State = PageState.Edit;
                 DeleteEnabled = true;
             }
             else
             {
                 DeleteEnabled = false;
+                State = PageState.AddNew;
             }
         }
 
@@ -69,10 +75,24 @@ namespace ToDoListGUI.ViewModels.UserDetail
         }
         public async Task OnSave()
         {
-            // make new object or store one on creation of page?
-            User user = new User(FirstName, LastName, DateOfBirth, ImageUrl, Id);
-            _toDoService.UpdateUser(user);
+            if(State == PageState.Edit)
+            {
+                // make new object or store one on creation of page?
+                _currentUser.FirstName = FirstName;
+                _currentUser.LastName = LastName;
+                _currentUser.BirthDate = DateOfBirth;
+                _currentUser.ImageURL = ImageUrl;
+                _toDoService.UpdateUser(_currentUser);
+            }
+            else if (State == PageState.AddNew)
+            {
+                _currentUser = new User(FirstName, LastName, DateOfBirth, ImageUrl);
+                _toDoService.SaveNewUser(_currentUser);
+            }
+
+
             await _navigation.GoBackAsync();
         }
+
     }
 }
