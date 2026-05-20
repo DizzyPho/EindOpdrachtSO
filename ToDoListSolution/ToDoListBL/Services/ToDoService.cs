@@ -53,6 +53,7 @@ namespace ToDoListBL.Services
         public void SaveNewTask(Todo task)
         {
             _repo.Upsert(task);
+            _messageService.Send<NewTaskMessage>(new NewTaskMessage(task));
         }
 
         public Todo GetTaskById(string id)

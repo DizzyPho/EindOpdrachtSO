@@ -23,6 +23,8 @@ namespace ToDoListGUI.ViewModels.TaskList
 
             NewTaskCommand = new AsyncCommand(OnNewTask);
             ShowUsersCommand = new AsyncCommand(OnShowUsers);            
+
+            messageService.Register<NewTaskMessage>(this, (o, message) => OnNewTask(message.NewTask));
         }
 
         public ObservableCollection<TaskViewModel> Tasks { get; }
@@ -53,6 +55,19 @@ namespace ToDoListGUI.ViewModels.TaskList
         public async Task OnTaskClicked(TaskViewModel task)
         {
             await _navigation.EditTaskPage(task.Id);
+        }
+
+        public void OnTaskUpdated(Todo task)
+        {
+            TaskViewModel taskVM = Tasks.First(vm => task.Id == vm.Id);
+            taskVM.Title = task.Title;
+            taskVM.Description = task.Description;
+            taskVM.IsCompleted = task.IsCompleted;
+        }
+
+        public void OnNewTask(Todo task)
+        {
+            Tasks.Add(new TaskViewModel(task, _toDoService));
         }
     }
 }
