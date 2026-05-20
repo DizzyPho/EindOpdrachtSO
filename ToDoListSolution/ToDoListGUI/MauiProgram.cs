@@ -41,6 +41,7 @@ namespace ToDoListGUI
             builder.Services.AddTransient<IToDoRepository, LiteDBToDoRepository>();
             builder.Services.AddTransient<ToDoService>();
             builder.Services.AddTransient<NavigationService>();
+            builder.Services.AddTransient<MessageService>();
 
             builder.Services.AddTransient<UserDetailViewModel>();
             return builder;

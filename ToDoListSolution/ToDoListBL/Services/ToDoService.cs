@@ -9,10 +9,12 @@ namespace ToDoListBL.Services
     public class ToDoService
     {
         private IToDoRepository _repo;
+        private MessageService _messageService;
 
-        public ToDoService(IToDoRepository repo)
+        public ToDoService(IToDoRepository repo, MessageService messageService)
         {
             _repo = repo;
+            _messageService = messageService;
         }
 
         public List<Todo> GetTasks()
