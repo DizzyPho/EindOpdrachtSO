@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using ToDoListBL.Domain;
 using ToDoListBL.Services;
+using ToDoListGUI.Commands;
 using ToDoListGUI.PageStates;
 using ToDoListGUI.Services;
 
@@ -24,6 +26,8 @@ namespace ToDoListGUI.ViewModels.TaskDetail
 
             var users = _toDoService.GetUsers();
             UserNames = new List<UserNameViewModel>(users.Select(user => new UserNameViewModel(user)));
+
+            GoBackCommand = new AsyncCommand(OnGoBack);
         }
 
         public string Title
@@ -41,6 +45,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             get => Get<bool>(); 
             set => Set(value);
         }
+        public ICommand GoBackCommand { get; init; }
         public List<UserNameViewModel> UserNames { get; init; }
         public UserNameViewModel SelectedUser
         {
@@ -60,6 +65,9 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             }
         }
 
-
+        public async Task OnGoBack()
+        {
+            await _navigationService.GoBackAsync();
+        }
     }
 }
