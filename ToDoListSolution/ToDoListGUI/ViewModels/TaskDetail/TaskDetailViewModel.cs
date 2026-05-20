@@ -82,7 +82,14 @@ namespace ToDoListGUI.ViewModels.TaskDetail
                 _currentTask = new Todo(Title, Description, IsCompleted, SelectedUser.Id);
                 _toDoService.SaveNewTask(_currentTask);
             }
-
+            else if (State == PageState.Edit)
+            {
+                _currentTask.Title = Title;
+                _currentTask.Description = Description;
+                _currentTask.IsCompleted = IsCompleted;
+                _currentTask.ResponsibleUserId = SelectedUser.Id;
+                _toDoService.UpdateTask(_currentTask);
+            }
             await _navigationService.GoBackAsync();
         }
     }
