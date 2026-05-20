@@ -14,13 +14,15 @@
         </Grid.ColumnDefinitions>
         <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2">
             <Label Margin="8" Text="TITLE" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
-            <Entry Margin="8"></Entry>
+            <Entry Margin="8" Text="{Binding Title}"></Entry>
             <Label Margin="8" Text="DESCRIPTION" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
-            <Entry Margin="8"></Entry>
+            <Entry Margin="8" Text="{Binding Description}"></Entry>
             <Label Margin="8" Text="USER" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
-            <Picker Margin="8"></Picker>
+            <Picker Margin="8" ItemsSource="{Binding UserNames}" SelectedItem="{Binding SelectedUser}">
+                
+            </Picker>
             <Label Margin="8" Text="COMPLETED?" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
-            <CheckBox></CheckBox>
+            <CheckBox Margin="8" IsChecked="{Binding IsCompleted}"></CheckBox>
         </VerticalStackLayout>
         <Button Margin="8" Grid.Row="1" Grid.Column="0" Text="Cancel" BackgroundColor="IndianRed"></Button>
         <Button Margin="8" Grid.Row="1" Grid.Column="1" Text="Save" BackgroundColor="PaleGreen"></Button>
