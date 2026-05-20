@@ -7,6 +7,9 @@ namespace ToDoListBL.Domain
 {
     public class User
     {
+        // LiteDB needs empty constructor
+        [Obsolete]
+        public User() { }
         public User(string firstName, string lastName, DateTime birthDate, string pictureURL, string id = null)
         {
 
