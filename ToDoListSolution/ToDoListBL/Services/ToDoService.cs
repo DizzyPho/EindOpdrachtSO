@@ -37,7 +37,12 @@ namespace ToDoListBL.Services
             _repo.UpdateTask(todo);
         }
 
-        public void Upsert(User user)
+        public void UpdateUser(User user)
+        {
+            _repo.Upsert(user);
+        }
+
+        public void SaveNewUser(User user)
         {
             _repo.Upsert(user);
         }

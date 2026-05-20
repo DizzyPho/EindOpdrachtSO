@@ -70,7 +70,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
         {
             // make new object or store one on creation of page?
             User user = new User(FirstName, LastName, DateOfBirth, ImageUrl, Id);
-            _toDoService.Upsert(user);
+            _toDoService.UpdateUser(user);
             await _navigation.GoBackAsync();
         }
     }
