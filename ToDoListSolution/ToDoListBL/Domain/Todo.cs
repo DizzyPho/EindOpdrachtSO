@@ -6,19 +6,24 @@ namespace ToDoListBL.Domain
 {
     public class Todo
     {
-        public Todo(int id, string title, string description, bool isCompleted, int responsibleUserId)
+        public Todo(string title, string description, bool isCompleted, string responsibleUserId, string id = null)
         {
-            Id = id;
             Title = title;
             Description = description;
             IsCompleted = isCompleted;
             ResponsibleUserId = responsibleUserId;
+
+            if(id == null)
+                Id = Guid.NewGuid().ToString();
+            else
+                Id = id;
+                
         }
 
-        public int Id {  get; init; }
+        public string Id {  get; init; }
         public string Title { get; init; }
         public string Description { get; init; }
         public bool IsCompleted { get; set; }
-        public int ResponsibleUserId { get; init; }
+        public string ResponsibleUserId { get; init; }
     }
 }
