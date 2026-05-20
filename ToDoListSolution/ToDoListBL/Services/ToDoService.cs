@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ToDoListBL.Domain;
 using ToDoListBL.Interfaces;
+using ToDoListBL.Messages;
 
 namespace ToDoListBL.Services
 {
@@ -40,6 +41,7 @@ namespace ToDoListBL.Services
         public void UpdateUser(User user)
         {
             _repo.Upsert(user);
+            _messageService.Send<UserUpdatedMessage>(new UserUpdatedMessage(user));
         }
 
         public void SaveNewUser(User user)
