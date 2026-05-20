@@ -11,7 +11,6 @@ namespace ToDoListBL.Interfaces
         public List<Todo> GetTasks();
         User GetUserById(string id);
         List<User> GetUsers();
-        public void UpdateTask(Todo todo);
         void Upsert(User user);
         void Upsert(Todo todo);
     }
