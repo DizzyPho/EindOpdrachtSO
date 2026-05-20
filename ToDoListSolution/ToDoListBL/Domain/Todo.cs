@@ -20,10 +20,10 @@ namespace ToDoListBL.Domain
                 
         }
 
-        public string Id {  get; init; }
-        public string Title { get; init; }
-        public string Description { get; init; }
+        public string Id {  get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public bool IsCompleted { get; set; }
-        public string ResponsibleUserId { get; init; }
+        public string ResponsibleUserId { get; set; }
     }
 }
