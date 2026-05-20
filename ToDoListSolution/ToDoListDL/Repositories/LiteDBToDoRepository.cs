@@ -41,5 +41,10 @@ namespace ToDoListDL.Repositories
         {
             _db.GetCollection<User>().Upsert(user);
         }
+
+        public void Upsert(Todo todo)
+        {
+            _db.GetCollection<Todo>().Upsert(todo);
+        }
     }
 }
