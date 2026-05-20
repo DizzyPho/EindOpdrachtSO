@@ -11,7 +11,7 @@ using ToDoListGUI.Services;
 
 namespace ToDoListGUI.ViewModels.TaskList
 {
-    public class TaskListViewModel
+    public class TaskListViewModel : BaseViewModel
     {
         NavigationService _navigation;
         public TaskListViewModel(ToDoService toDoService, NavigationService navigationService)
@@ -26,6 +26,19 @@ namespace ToDoListGUI.ViewModels.TaskList
         }
 
         public ObservableCollection<TaskViewModel> Tasks { get; }
+        public TaskViewModel SelectedTask
+        {
+            get => Get<TaskViewModel>();
+            set
+            {
+                Set(value);
+                if (SelectedTask != null)
+                {
+                    OnTaskClicked(value).ConfigureAwait(false);
+                    SelectedTask = null;
+                }
+            }
+        }
         public ICommand NewTaskCommand { get; init; }
         public ICommand ShowUsersCommand { get; init; }
 
@@ -36,6 +49,10 @@ namespace ToDoListGUI.ViewModels.TaskList
         public async Task OnShowUsers()
         {
             await _navigation.GoToAsync<UserListPage>();
+        }
+        public async Task OnTaskClicked(TaskViewModel task)
+        {
+            await _navigation.EditTaskPage(task.Id);
         }
     }
 }

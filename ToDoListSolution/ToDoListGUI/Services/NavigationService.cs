@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ToDoListBL.Domain;
 using ToDoListGUI.Pages;
 
 namespace ToDoListGUI.Services
@@ -41,6 +42,12 @@ namespace ToDoListGUI.Services
         {
             Dictionary<string, object>? parameters = new Dictionary<string, object>{ ["id"] = userId };
             await GoToAsync<UserDetailPage>(parameters);
+        }
+
+        public async Task EditTaskPage(string taskId)
+        {
+            Dictionary<string, object>? parameters = new Dictionary<string, object> { ["id"] = taskId };
+            await GoToAsync<TaskDetailPage>(parameters);
         }
     }
 }
