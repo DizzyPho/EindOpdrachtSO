@@ -31,9 +31,10 @@ namespace ToDoListGUI.ViewModels.TaskList
 
             NewTaskCommand = new AsyncCommand(OnNewTask);
             ShowUsersCommand = new AsyncCommand(OnShowUsers);
-            NoFilterCommand = new Command(() => SortAndFilter(null, null));
+
+            NoFilterCommand = new Command(() => SortAndFilter(new NoFilterStrategy(), null));
             ShowUnfinishedCommand = new Command(() => SortAndFilter(new UnfinishedFilterStrategy(), null));
-            SortMostRecentCommand = new Command(() => SortAndFilter(null, new RecencySortStrategy()));
+            SortMostRecentCommand = new Command(() => SortAndFilter(new NoFilterStrategy(), new RecencySortStrategy()));
 
             messageService.Register<NewTaskMessage>(this, (o, message) => OnTaskAdded(message.NewTask));
             messageService.Register<TaskUpdatedMessage>(this, (o, message) => OnTaskUpdated(message.UpdatedTask));
@@ -93,7 +94,7 @@ namespace ToDoListGUI.ViewModels.TaskList
         {
             TaskViewModel addedTask = new TaskViewModel(task, _toDoService);
             _allTasks.Add(addedTask);
-            if (_currentFilter == null || _currentFilter.PassesFilter(addedTask))
+            if (_currentFilter.PassesFilter(addedTask))
             {
                 VisibleTasks.Add(addedTask);
                 if(_currentSorter != null)
@@ -107,18 +108,10 @@ namespace ToDoListGUI.ViewModels.TaskList
 
         public void SortAndFilter(IFilterStrategy filterStrategy, IComparer<TaskViewModel> sortingStrategy)
         {
-            List<TaskViewModel> filteredList;
-            if (filterStrategy != null)
-            {
-                 filteredList = filterStrategy.Filter(_allTasks);
-            }
-            else
-            {
-                filteredList = _allTasks;
-            }
+            List<TaskViewModel> filteredList = filterStrategy.Filter(_allTasks);
+
             if(sortingStrategy != null) filteredList.Sort(sortingStrategy);
             VisibleTasks = new ObservableCollection<TaskViewModel>(filteredList);
-
             _currentFilter = filterStrategy;
             _currentSorter = sortingStrategy;
         }
