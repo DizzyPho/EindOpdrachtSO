@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using ToDoListBL.Domain;
+using ToDoListGUI.ViewModels.TaskList;
 
 namespace ToDoListGUI.Strategies.TaskFiltering
 {
     public class UnfinishedFilterStrategy : IFilterStrategy
     {
-        public List<Todo> Filter(List<Todo> tasks)
+        public List<TaskViewModel> Filter(List<TaskViewModel> tasks)
         {
             return tasks.Where(task => task.IsCompleted == false).ToList();
         }
