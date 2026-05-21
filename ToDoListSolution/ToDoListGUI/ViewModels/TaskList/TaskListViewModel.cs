@@ -8,8 +8,9 @@ using ToDoListBL.Messages;
 using ToDoListBL.Services;
 using ToDoListGUI.Commands;
 using ToDoListGUI.Pages;
-using ToDoListGUI.Routes;
 using ToDoListGUI.Services;
+using ToDoListGUI.Strategies.TaskFiltering;
+using ToDoListGUI.Strategies.TaskSorting;
 
 namespace ToDoListGUI.ViewModels.TaskList
 {
@@ -19,21 +20,29 @@ namespace ToDoListGUI.ViewModels.TaskList
         ToDoService _toDoService;
         public TaskListViewModel(ToDoService toDoService, NavigationService navigationService, MessageService messageService)
         {
-            Tasks = new ObservableCollection<TaskViewModel>(
-                                            toDoService.GetTasks()
-                                            .Select(todo => new TaskViewModel(todo, toDoService)));
+            _allTasks = toDoService.GetTasks()
+                                .Select(todo => new TaskViewModel(todo, toDoService))
+                                .ToList();
+            VisibleTasks = new ObservableCollection<TaskViewModel>(_allTasks);
             _navigation = navigationService;
             _toDoService = toDoService;
 
             NewTaskCommand = new AsyncCommand(OnNewTask);
             ShowUsersCommand = new AsyncCommand(OnShowUsers);
+            NoFilterCommand = new Command(() => SortAndFilter(null, null));
+            ShowUnfinishedCommand = new Command(() => SortAndFilter(new UnfinishedFilterStrategy(), null));
+            SortMostRecentCommand = new Command(() => SortAndFilter(null, new RecencySortStrategy()));
 
             messageService.Register<NewTaskMessage>(this, (o, message) => OnNewTask(message.NewTask));
             messageService.Register<TaskUpdatedMessage>(this, (o, message) => OnTaskUpdated(message.UpdatedTask));
 
         }
-
-        public ObservableCollection<TaskViewModel> Tasks { get; }
+        private List<TaskViewModel> _allTasks;
+        public ObservableCollection<TaskViewModel> VisibleTasks
+        {
+            get => Get<ObservableCollection<TaskViewModel>>();
+            set => Set(value);
+        }
         public TaskViewModel SelectedTask
         {
             get => Get<TaskViewModel>();
@@ -49,6 +58,9 @@ namespace ToDoListGUI.ViewModels.TaskList
         }
         public ICommand NewTaskCommand { get; init; }
         public ICommand ShowUsersCommand { get; init; }
+        public ICommand NoFilterCommand { get; init; }
+        public ICommand ShowUnfinishedCommand { get; init; }
+        public ICommand SortMostRecentCommand { get; init; }
 
         public async Task OnNewTask()
         {
@@ -65,7 +77,7 @@ namespace ToDoListGUI.ViewModels.TaskList
 
         public void OnTaskUpdated(Todo task)
         {
-            TaskViewModel taskVM = Tasks.First<TaskViewModel>(vm => task.Id == vm.Id);
+            TaskViewModel taskVM = _allTasks.First<TaskViewModel>(vm => task.Id == vm.Id);
 
             if(taskVM != null)
             {
@@ -77,7 +89,22 @@ namespace ToDoListGUI.ViewModels.TaskList
 
         public void OnNewTask(Todo task)
         {
-            Tasks.Add(new TaskViewModel(task, _toDoService));
+            VisibleTasks.Add(new TaskViewModel(task, _toDoService));
+        }
+
+        public void SortAndFilter(IFilterStrategy filterStrategy, IComparer<TaskViewModel> sortingStrategy)
+        {
+            List<TaskViewModel> filteredList;
+            if (filterStrategy != null)
+            {
+                 filteredList = filterStrategy.Filter(_allTasks);
+            }
+            else
+            {
+                filteredList = _allTasks;
+            }
+            if(sortingStrategy != null) filteredList.Sort(sortingStrategy);
+            VisibleTasks = new ObservableCollection<TaskViewModel>(filteredList);
         }
     }
 }

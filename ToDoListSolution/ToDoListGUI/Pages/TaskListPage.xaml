@@ -16,14 +16,15 @@
 
         <HorizontalStackLayout Grid.Row="0" 
                                Grid.ColumnSpan="2">
-            <Button Text="Show All" Margin="8" BackgroundColor="PaleVioletRed"></Button>
-            <Button Text="Show Unfinished" Margin="8" BackgroundColor="PaleVioletRed"></Button>
-            <Button Text="Show All (sort by most recent)" Margin="8" BackgroundColor="PaleVioletRed"></Button>
+            <Button Text="Show All" Margin="8" BackgroundColor="PaleVioletRed" Command="{Binding NoFilterCommand}"></Button>
+            <Button Text="Show Unfinished" Margin="8" BackgroundColor="PaleVioletRed" Command="{Binding ShowUnfinishedCommand}"></Button>
+            <Button Text="Show All (sort by most recent)" Margin="8" BackgroundColor="PaleVioletRed" 
+                    Command="{Binding SortMostRecentCommand}"></Button>
         </HorizontalStackLayout>
 
         <CollectionView Grid.Row="1" 
                         Grid.ColumnSpan="2"
-                        ItemsSource="{Binding Tasks}"
+                        ItemsSource="{Binding VisibleTasks}"
                         SelectedItem="{Binding SelectedTask}"
                         Margin="8"
                         SelectionMode="Single">
