@@ -12,5 +12,10 @@ namespace ToDoListGUI.Strategies.TaskFiltering
         {
             return tasks.Where(task => task.IsCompleted == false).ToList();
         }
+
+        public bool PassesFilter(TaskViewModel task)
+        {
+            return task.IsCompleted == false;
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace ToDoListGUI.Strategies.TaskFiltering
     public interface IFilterStrategy
     {
         public List<TaskViewModel> Filter(List<TaskViewModel> tasks);
+        public bool PassesFilter(TaskViewModel task);
     }
 }
