@@ -32,8 +32,16 @@ namespace ToDoListGUI.ViewModels.TaskList
             }
         }
         private Todo Todo { get; init; }
-        public string Title { get; set; } 
-        public string Description { get; set; }
+        public string Title
+        {
+            get => Get<String>();
+            set => Set(value);
+        }
+        public string Description
+        {
+            get => Get<String>();
+            set => Set(value);
+        }
 
         private void UpdateTaskCompleted(bool value)
         {
