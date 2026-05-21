@@ -79,7 +79,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
         {
             if(State == PageState.AddNew)
             {
-                _currentTask = new Todo(Title, Description, IsCompleted, SelectedUser.Id);
+                _currentTask = new Todo(Title, Description, IsCompleted, SelectedUser.Id, DateTime.Now);
                 _toDoService.SaveNewTask(_currentTask);
             }
             else if (State == PageState.Edit && _currentTask != null)
