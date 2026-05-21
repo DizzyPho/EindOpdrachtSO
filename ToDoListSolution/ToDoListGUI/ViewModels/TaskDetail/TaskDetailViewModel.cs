@@ -15,7 +15,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
         ToDoService _toDoService;
         NavigationService _navigationService;
         MessageService _messageService;
-        Todo _currentTask;
+        Todo? _currentTask;
         public PageState State { get; private set; }
 
         public TaskDetailViewModel(ToDoService toDoService, NavigationService navigationService, MessageService messageService)
@@ -82,7 +82,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
                 _currentTask = new Todo(Title, Description, IsCompleted, SelectedUser.Id);
                 _toDoService.SaveNewTask(_currentTask);
             }
-            else if (State == PageState.Edit)
+            else if (State == PageState.Edit && _currentTask != null)
             {
                 _currentTask.Title = Title;
                 _currentTask.Description = Description;
