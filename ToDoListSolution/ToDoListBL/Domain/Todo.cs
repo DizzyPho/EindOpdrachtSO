@@ -12,6 +12,7 @@ namespace ToDoListBL.Domain
             Description = description;
             IsCompleted = isCompleted;
             ResponsibleUserId = responsibleUserId;
+            CreationDate = DateTime.Now;
 
             if(id == null)
                 Id = Guid.NewGuid().ToString();
@@ -24,6 +25,7 @@ namespace ToDoListBL.Domain
         public string Title { get; set; }
         public string Description { get; set; }
         public bool IsCompleted { get; set; }
+        public DateTime CreationDate { get; init; }
         public string ResponsibleUserId { get; set; }
     }
 }
