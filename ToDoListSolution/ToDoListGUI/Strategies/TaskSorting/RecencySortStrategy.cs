@@ -10,7 +10,7 @@ namespace ToDoListGUI.Strategies.TaskSorting
     {
         public int Compare(TaskViewModel? x, TaskViewModel? y)
         {
-            return DateTime.Compare(x.CreationDate, y.CreationDate);
+            return DateTime.Compare(y.CreationDate, x.CreationDate);
         }
     }
 }
