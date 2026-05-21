@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
 using ToDoListBL.Domain;
 using ToDoListBL.Services;
 
@@ -21,6 +22,8 @@ namespace ToDoListGUI.ViewModels.TaskList
             Id = todo.Id;
             CreationDate = todo.CreationDate;
             IsInitPhase = false;
+
+            UpdateTaskCompletedCommand = new Command(UpdateTaskCompleted);
         }
         public string Id { get; init; }
         public DateTime CreationDate { get; init;  }
@@ -30,7 +33,7 @@ namespace ToDoListGUI.ViewModels.TaskList
             set 
             {    
                 Set(value);
-                UpdateTaskCompleted(value);
+                Todo.IsCompleted = value;
             }
         }
         private Todo Todo { get; init; }
@@ -44,14 +47,10 @@ namespace ToDoListGUI.ViewModels.TaskList
             get => Get<String>();
             set => Set(value);
         }
-
-        private void UpdateTaskCompleted(bool value)
+        public ICommand UpdateTaskCompletedCommand { get; init; }
+        private void UpdateTaskCompleted()
         {
-            if(!IsInitPhase)
-            {
-                Todo.IsCompleted = value;
-                _toDoService.UpdateTaskCompleted(Todo);
-            }
+             _toDoService.UpdateTaskCompleted(Todo);   
         }
     }
 }

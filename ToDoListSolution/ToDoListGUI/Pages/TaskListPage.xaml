@@ -60,7 +60,8 @@
                                   VerticalOptions="Center"
                                   HorizontalOptions="Center"                                 
                                   Grid.RowSpan="2"
-                                  Grid.Column="0"></CheckBox>
+                                  Grid.Column="0"
+                                  Command= "{Binding UpdateTaskCompletedCommand}"></CheckBox>
                         </Grid>
                     </Border>
                 </DataTemplate>
