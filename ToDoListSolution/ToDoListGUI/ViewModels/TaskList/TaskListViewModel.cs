@@ -18,6 +18,8 @@ namespace ToDoListGUI.ViewModels.TaskList
     {
         NavigationService _navigation;
         ToDoService _toDoService;
+        IFilterStrategy _currentFilter;
+        IComparer<TaskViewModel> _currentSorter;
         public TaskListViewModel(ToDoService toDoService, NavigationService navigationService, MessageService messageService)
         {
             _allTasks = toDoService.GetTasks()
@@ -33,7 +35,7 @@ namespace ToDoListGUI.ViewModels.TaskList
             ShowUnfinishedCommand = new Command(() => SortAndFilter(new UnfinishedFilterStrategy(), null));
             SortMostRecentCommand = new Command(() => SortAndFilter(null, new RecencySortStrategy()));
 
-            messageService.Register<NewTaskMessage>(this, (o, message) => OnNewTask(message.NewTask));
+            messageService.Register<NewTaskMessage>(this, (o, message) => OnTaskAdded(message.NewTask));
             messageService.Register<TaskUpdatedMessage>(this, (o, message) => OnTaskUpdated(message.UpdatedTask));
 
         }
@@ -87,9 +89,20 @@ namespace ToDoListGUI.ViewModels.TaskList
             }
         }
 
-        public void OnNewTask(Todo task)
+        public void OnTaskAdded(Todo task)
         {
-            VisibleTasks.Add(new TaskViewModel(task, _toDoService));
+            TaskViewModel addedTask = new TaskViewModel(task, _toDoService);
+            _allTasks.Add(addedTask);
+            if (_currentFilter == null || _currentFilter.PassesFilter(addedTask))
+            {
+                VisibleTasks.Add(addedTask);
+                if(_currentSorter != null)
+                {
+                    var currentList = VisibleTasks.ToList();
+                    currentList.Sort(_currentSorter);
+                    VisibleTasks = new ObservableCollection<TaskViewModel>(currentList);
+                }
+            }
         }
 
         public void SortAndFilter(IFilterStrategy filterStrategy, IComparer<TaskViewModel> sortingStrategy)
@@ -105,6 +118,9 @@ namespace ToDoListGUI.ViewModels.TaskList
             }
             if(sortingStrategy != null) filteredList.Sort(sortingStrategy);
             VisibleTasks = new ObservableCollection<TaskViewModel>(filteredList);
+
+            _currentFilter = filterStrategy;
+            _currentSorter = sortingStrategy;
         }
     }
 }
