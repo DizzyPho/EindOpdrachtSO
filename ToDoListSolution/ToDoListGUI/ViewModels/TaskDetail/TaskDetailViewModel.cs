@@ -63,7 +63,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
                 Title = _currentTask.Title;
                 Description = _currentTask.Description;
                 IsCompleted = _currentTask.IsCompleted;
-                SelectedUser = UserNames.First(user => user.Id == _currentTask.ResponsibleUserId);
+                SelectedUser = UserNames.FirstOrDefault(user => user.Id == _currentTask.ResponsibleUserId);
             }
             else
             {
