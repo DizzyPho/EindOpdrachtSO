@@ -23,6 +23,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
             _navigation = navigationService;
             GoBackCommand = new AsyncCommand(OnGoBack);
             SaveCommand = new AsyncCommand(OnSave);
+            DeleteCommand = new AsyncCommand(OnDeleteUser);
         }
         public string Id { get; private set; }
         public string FirstName
@@ -51,6 +52,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
             set => Set(value);
         }
         public ICommand GoBackCommand { get; init; }
+        public ICommand DeleteCommand { get; init; }
         public ICommand SaveCommand { get; private set; }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
