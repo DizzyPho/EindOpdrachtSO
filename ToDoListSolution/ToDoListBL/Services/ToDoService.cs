@@ -70,6 +70,7 @@ namespace ToDoListBL.Services
 
         public void DeleteUser(string id)
         {
+            _messageService.Send<UserDeletedMessage>(new UserDeletedMessage(id));
             _repo.DeleteUser(id);
         }
     }
