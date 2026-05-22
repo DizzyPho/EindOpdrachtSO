@@ -39,6 +39,7 @@ namespace ToDoListBL.Services
         }
         public void UpdateTask(Todo todo)
         {
+            todo.LastChangeDate = DateTime.Now;
             _repo.Upsert(todo);
             _messageService.Send<TaskUpdatedMessage>(new TaskUpdatedMessage(todo));
         }
