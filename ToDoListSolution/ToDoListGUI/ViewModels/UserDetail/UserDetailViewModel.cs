@@ -86,7 +86,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
             }
             else if (State == PageState.AddNew)
             {
-                _currentUser = new User(FirstName, LastName, DateOfBirth, ImageUrl);
+                _currentUser = new User(FirstName, LastName, DateOfBirth, ImageUrl, DateTime.Now);
                 _toDoService.SaveNewUser(_currentUser);
             }
 

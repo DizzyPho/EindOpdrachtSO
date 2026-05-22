@@ -10,13 +10,18 @@ namespace ToDoListBL.Domain
         // LiteDB needs empty constructor
         [Obsolete]
         public User() { }
-        public User(string firstName, string lastName, DateTime birthDate, string pictureURL, string id = null)
+        public User(string firstName, string lastName, DateTime birthDate, string pictureURL, DateTime creationDate, string id = null)
+            : this(firstName, lastName, birthDate, pictureURL, creationDate, creationDate) { }
+
+        public User(string firstName, string lastName, DateTime birthDate, string pictureURL, DateTime creationDate, DateTime lastModifiedDate, string id = null)
         {
 
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
             ImageURL = pictureURL;
+            CreationDate = creationDate;
+            LastModifiedDate = lastModifiedDate;
             if (id != null)
             {
                 Id = id;
@@ -32,6 +37,8 @@ namespace ToDoListBL.Domain
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string ImageURL { get; set; }
+        public DateTime CreationDate { get; init; }
+        public DateTime LastModifiedDate { get; set; }
 
         // method from https://stackoverflow.com/questions/4127363/date-difference-in-years-using-c-sharp
         public int GetAge()
