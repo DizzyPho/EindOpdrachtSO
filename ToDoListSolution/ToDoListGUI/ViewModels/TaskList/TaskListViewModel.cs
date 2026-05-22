@@ -29,6 +29,8 @@ namespace ToDoListGUI.ViewModels.TaskList
             _navigation = navigationService;
             _toDoService = toDoService;
 
+            _currentFilter = new NoFilterStrategy();
+
             NewTaskCommand = new AsyncCommand(OnNewTask);
             ShowUsersCommand = new AsyncCommand(OnShowUsers);
 
