@@ -46,6 +46,7 @@ namespace ToDoListBL.Services
 
         public void UpdateUser(User user)
         {
+            user.LastModifiedDate = DateTime.Now;
             _repo.Upsert(user);
             _messageService.Send<UserUpdatedMessage>(new UserUpdatedMessage(user));
         }
