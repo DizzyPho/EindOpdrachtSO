@@ -20,13 +20,13 @@ namespace ToDoListGUI.ViewModels.TaskList
             Description = todo.Description;
             IsCompleted = todo.IsCompleted;
             Id = todo.Id;
-            LastChangeDate = todo.LastChangeDate;
+            LastModifiedDate = todo.LastModifiedDate;
             IsInitPhase = false;
 
             UpdateTaskCompletedCommand = new Command(UpdateTaskCompleted);
         }
         public string Id { get; init; }
-        public DateTime LastChangeDate { get; init;  }
+        public DateTime LastModifiedDate { get; init;  }
         public bool IsCompleted
         {
             get => Get<bool>();

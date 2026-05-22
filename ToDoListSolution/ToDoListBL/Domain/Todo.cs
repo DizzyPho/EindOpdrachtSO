@@ -19,7 +19,7 @@ namespace ToDoListBL.Domain
             IsCompleted = isCompleted;
             ResponsibleUserId = responsibleUserId;
             CreationDate = creationDate;
-            LastChangeDate = lastChangeDate;
+            LastModifiedDate = lastChangeDate;
 
             if (id == null)
                 Id = Guid.NewGuid().ToString();
@@ -33,7 +33,7 @@ namespace ToDoListBL.Domain
         public string Description { get; set; }
         public bool IsCompleted { get; set; }
         public DateTime CreationDate { get; init; }
-        public DateTime LastChangeDate { get; set; }
+        public DateTime LastModifiedDate { get; set; }
         public string ResponsibleUserId { get; set; }
     }
 }
