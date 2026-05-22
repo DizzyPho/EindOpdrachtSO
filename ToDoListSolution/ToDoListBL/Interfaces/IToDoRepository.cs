@@ -13,5 +13,6 @@ namespace ToDoListBL.Interfaces
         List<User> GetUsers();
         void Upsert(User user);
         void Upsert(Todo todo);
+        public void DeleteUser(string id);
     }
 }

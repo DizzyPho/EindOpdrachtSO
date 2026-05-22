@@ -46,5 +46,10 @@ namespace ToDoListDL.Repositories
         {
             _db.GetCollection<Todo>().Upsert(todo);
         }
+
+        public void DeleteUser(string id)
+        {
+            _db.GetCollection<User>().Delete(id);
+        }
     }
 }

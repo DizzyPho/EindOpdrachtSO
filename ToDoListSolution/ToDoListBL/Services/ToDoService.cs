@@ -67,5 +67,10 @@ namespace ToDoListBL.Services
         {
             return _repo.GetTaskById(id);
         }
+
+        public void DeleteUser(string id)
+        {
+            _repo.DeleteUser(id);
+        }
     }
 }
