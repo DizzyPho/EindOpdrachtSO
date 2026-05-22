@@ -26,7 +26,7 @@ namespace ToDoListGUI.ViewModels.TaskList
             UpdateTaskCompletedCommand = new Command(UpdateTaskCompleted);
         }
         public string Id { get; init; }
-        public DateTime LastModifiedDate { get; init;  }
+        public DateTime LastModifiedDate { get; set; }
         public bool IsCompleted
         {
             get => Get<bool>();

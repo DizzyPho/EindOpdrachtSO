@@ -89,6 +89,7 @@ namespace ToDoListGUI.ViewModels.TaskList
                 taskVM.Title = task.Title;
                 taskVM.Description = task.Description;
                 taskVM.IsCompleted = task.IsCompleted;
+                taskVM.LastModifiedDate = task.LastModifiedDate;
             }
         }
 
