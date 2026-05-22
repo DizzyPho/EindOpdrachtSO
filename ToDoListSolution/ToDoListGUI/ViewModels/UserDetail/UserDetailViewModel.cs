@@ -45,7 +45,11 @@ namespace ToDoListGUI.ViewModels.UserDetail
             get => Get<DateTime>();
             set => Set(value);
         }
-        public bool DeleteEnabled { get; set; }
+        public bool DeleteEnabled 
+        { 
+            get => Get<bool>();
+            set => Set(value);
+        }
         public ICommand GoBackCommand { get; init; }
         public ICommand SaveCommand { get; private set; }
 
@@ -91,6 +95,12 @@ namespace ToDoListGUI.ViewModels.UserDetail
             }
 
 
+            await _navigation.GoBackAsync();
+        }
+
+        public async Task OnDeleteUser()
+        {
+            _toDoService.DeleteUser(Id);
             await _navigation.GoBackAsync();
         }
 
