@@ -122,8 +122,8 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             IsTitleValid = !string.IsNullOrWhiteSpace(Title);
             IsUserValid = SelectedUser != null;
 
-            TitleBorderStroke = IsTitleValid? Brush.Black : Brush.Red;
-            UserBorderStroke = IsUserValid? Brush.Black : Brush.Red;
+            TitleBorderStroke = IsTitleValid? Brush.Default : Brush.Red;
+            UserBorderStroke = IsUserValid? Brush.Default : Brush.Red;
 
             return IsTitleValid && IsUserValid;
         }

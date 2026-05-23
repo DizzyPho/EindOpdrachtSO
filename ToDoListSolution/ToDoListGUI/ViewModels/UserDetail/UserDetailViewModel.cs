@@ -124,7 +124,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
         {
             IsNameValid = !string.IsNullOrWhiteSpace(FirstName);
 
-            NameBorderStroke = IsNameValid ? Brush.Black : Brush.Red;
+            NameBorderStroke = IsNameValid ? Brush.Default : Brush.Red;
 
             return IsNameValid;
         }
