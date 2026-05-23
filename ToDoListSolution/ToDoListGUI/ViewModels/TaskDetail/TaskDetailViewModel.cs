@@ -30,6 +30,9 @@ namespace ToDoListGUI.ViewModels.TaskDetail
 
             GoBackCommand = new AsyncCommand(OnGoBack);
             SaveCommand = new AsyncCommand(OnSave);
+
+            TitleBorderStroke = Brush.Transparent;
+            UserBorderStroke = Brush.Transparent;
         }
         public string Title
         {
@@ -122,8 +125,8 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             IsTitleValid = !string.IsNullOrWhiteSpace(Title);
             IsUserValid = SelectedUser != null;
 
-            TitleBorderStroke = IsTitleValid? Brush.Default : Brush.Red;
-            UserBorderStroke = IsUserValid? Brush.Default : Brush.Red;
+            TitleBorderStroke = IsTitleValid? Brush.Transparent : Brush.Red;
+            UserBorderStroke = IsUserValid? Brush.Transparent : Brush.Red;
 
             return IsTitleValid && IsUserValid;
         }

@@ -24,6 +24,8 @@ namespace ToDoListGUI.ViewModels.UserDetail
             GoBackCommand = new AsyncCommand(OnGoBack);
             SaveCommand = new AsyncCommand(OnSave);
             DeleteCommand = new AsyncCommand(OnDeleteUser);
+
+            NameBorderStroke = Brush.Transparent;
         }
         public string Id { get; private set; }
         public string FirstName
@@ -124,7 +126,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
         {
             IsNameValid = !string.IsNullOrWhiteSpace(FirstName);
 
-            NameBorderStroke = IsNameValid ? Brush.Default : Brush.Red;
+            NameBorderStroke = IsNameValid ? Brush.Transparent : Brush.Red;
 
             return IsNameValid;
         }
