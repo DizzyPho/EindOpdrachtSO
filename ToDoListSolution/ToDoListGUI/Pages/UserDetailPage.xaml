@@ -10,7 +10,10 @@
         </Grid.RowDefinitions>
         <VerticalStackLayout>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="PHOTO (URL)"></Label>
-            <Image Margin="8" Source="{Binding ImageUrl}" MaximumHeightRequest="100" MaximumWidthRequest="100"></Image>
+            <Border MaximumHeightRequest="200" MaximumWidthRequest="200" Stroke="Transparent">
+                <Image Margin="8" Source="{Binding ImageUrl}" ></Image>
+            </Border>
+
             <Entry Margin="8" Text="{Binding ImageUrl}"></Entry>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="FIRST NAME"></Label>
             <Border Margin="8" Stroke="{Binding NameBorderStroke}">
