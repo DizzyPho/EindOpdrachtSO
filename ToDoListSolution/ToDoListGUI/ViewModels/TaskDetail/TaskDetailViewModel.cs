@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Maui.Behaviors;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
@@ -30,7 +31,6 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             GoBackCommand = new AsyncCommand(OnGoBack);
             SaveCommand = new AsyncCommand(OnSave);
         }
-
         public string Title
         {
             get => Get<string>();
@@ -44,6 +44,27 @@ namespace ToDoListGUI.ViewModels.TaskDetail
         public bool IsCompleted
         {
             get => Get<bool>(); 
+            set => Set(value);
+        }
+
+        public bool IsTitleValid
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+        public bool IsUserValid
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+        public Brush TitleBorderStroke
+        {
+            get => Get<Brush>(); 
+            set => Set(value);
+        }
+        public Brush UserBorderStroke
+        {
+            get => Get<Brush>();
             set => Set(value);
         }
         public ICommand GoBackCommand { get; init; }
@@ -77,6 +98,10 @@ namespace ToDoListGUI.ViewModels.TaskDetail
         }
         public async Task OnSave()
         {
+            if (!Validate())
+            {
+                return; 
+            }
             if(State == PageState.AddNew)
             {
                 _currentTask = new Todo(Title, Description, IsCompleted, SelectedUser.Id, DateTime.Now);
@@ -91,6 +116,16 @@ namespace ToDoListGUI.ViewModels.TaskDetail
                 _toDoService.UpdateTask(_currentTask);
             }
             await _navigationService.GoBackAsync();
+        }
+        public bool Validate()
+        {
+            IsTitleValid = !string.IsNullOrWhiteSpace(Title);
+            IsUserValid = SelectedUser != null;
+
+            TitleBorderStroke = IsTitleValid? Brush.Black : Brush.Red;
+            UserBorderStroke = IsUserValid? Brush.Black : Brush.Red;
+
+            return IsTitleValid && IsUserValid;
         }
     }
 }

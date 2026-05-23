@@ -14,7 +14,11 @@
         </Grid.ColumnDefinitions>
         <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2">
             <Label Margin="8" Text="TITLE" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
-            <Entry Margin="8" Text="{Binding Title}"></Entry>
+            <Border Stroke="{Binding TitleBorderStroke}" Margin="8">
+                <Entry Text="{Binding Title}">
+                   
+                </Entry>
+            </Border>
             <Label Margin="8" Text="DESCRIPTION" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
             <Entry Margin="8" Text="{Binding Description}"></Entry>
             <Label Margin="8" Text="USER" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
