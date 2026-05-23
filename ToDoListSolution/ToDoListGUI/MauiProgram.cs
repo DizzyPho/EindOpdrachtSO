@@ -1,4 +1,5 @@
-﻿using LiteDB;
+﻿using CommunityToolkit.Maui;
+using LiteDB;
 using Microsoft.Extensions.Logging;
 using System.Runtime.CompilerServices;
 using ToDoListBL.Interfaces;
@@ -18,6 +19,7 @@ namespace ToDoListGUI
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
