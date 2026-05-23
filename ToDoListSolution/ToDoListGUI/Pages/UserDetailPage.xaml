@@ -13,7 +13,10 @@
             <Image Margin="8" Source="{Binding ImageUrl}" MaximumHeightRequest="100" MaximumWidthRequest="100"></Image>
             <Entry Margin="8" Text="{Binding ImageUrl}"></Entry>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="FIRST NAME"></Label>
-            <Entry Margin="8" Text="{Binding FirstName}"></Entry>
+            <Border Margin="8" Stroke="{Binding NameBorderStroke}">
+                <Entry Text="{Binding FirstName}">
+                </Entry>
+            </Border>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="LAST NAME"></Label>
             <Entry Margin="8" Text="{Binding LastName}"></Entry>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="DATE OF BIRTH"></Label>

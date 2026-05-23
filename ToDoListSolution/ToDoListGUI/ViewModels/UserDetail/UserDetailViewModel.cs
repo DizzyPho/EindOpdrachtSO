@@ -51,6 +51,16 @@ namespace ToDoListGUI.ViewModels.UserDetail
             get => Get<bool>();
             set => Set(value);
         }
+        public bool IsNameValid
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+        public Brush NameBorderStroke
+        {
+            get => Get<Brush>();
+            set => Set(value);
+        }
         public ICommand GoBackCommand { get; init; }
         public ICommand DeleteCommand { get; init; }
         public ICommand SaveCommand { get; private set; }
@@ -81,6 +91,10 @@ namespace ToDoListGUI.ViewModels.UserDetail
         }
         public async Task OnSave()
         {
+            if(!Validate())
+            {
+                return; 
+            }
             if(State == PageState.Edit)
             {
                 // make new object or store one on creation of page?
@@ -106,5 +120,13 @@ namespace ToDoListGUI.ViewModels.UserDetail
             await _navigation.GoBackAsync();
         }
 
+        public bool Validate()
+        {
+            IsNameValid = !string.IsNullOrWhiteSpace(FirstName);
+
+            NameBorderStroke = IsNameValid ? Brush.Black : Brush.Red;
+
+            return IsNameValid;
+        }
     }
 }
