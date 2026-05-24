@@ -30,12 +30,13 @@ namespace ToDoListGUI.ViewModels.TaskList
             _toDoService = toDoService;
 
             _currentFilter = new NoFilterStrategy();
+            _currentSorter = new NoSortingStrategy();
 
             NewTaskCommand = new AsyncCommand(OnNewTask);
             ShowUsersCommand = new AsyncCommand(OnShowUsers);
 
-            NoFilterCommand = new Command(() => SortAndFilter(new NoFilterStrategy(), null));
-            ShowUnfinishedCommand = new Command(() => SortAndFilter(new UnfinishedFilterStrategy(), null));
+            NoFilterCommand = new Command(() => SortAndFilter(new NoFilterStrategy(), new NoSortingStrategy()));
+            ShowUnfinishedCommand = new Command(() => SortAndFilter(new UnfinishedFilterStrategy(), new NoSortingStrategy()));
             SortMostRecentCommand = new Command(() => SortAndFilter(new NoFilterStrategy(), new RecencySortStrategy()));
 
             messageService.Register<NewTaskMessage>(this, (o, message) => OnTaskAdded(message.NewTask));
@@ -113,7 +114,7 @@ namespace ToDoListGUI.ViewModels.TaskList
         {
             List<TaskViewModel> filteredList = filterStrategy.Filter(_allTasks);
 
-            if(sortingStrategy != null) filteredList.Sort(sortingStrategy);
+            filteredList.Sort(sortingStrategy);
             VisibleTasks = new ObservableCollection<TaskViewModel>(filteredList);
             _currentFilter = filterStrategy;
             _currentSorter = sortingStrategy;
