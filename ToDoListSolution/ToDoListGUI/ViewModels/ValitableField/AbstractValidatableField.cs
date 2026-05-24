@@ -9,7 +9,11 @@ namespace ToDoListGUI.ViewModels.ValitableField
         public T Value
         {
             get => Get<T>();
-            set => Set(value);
+            set
+            {
+                Set(value);
+                Validate();
+            }
         }
         public bool IsValid
         {
