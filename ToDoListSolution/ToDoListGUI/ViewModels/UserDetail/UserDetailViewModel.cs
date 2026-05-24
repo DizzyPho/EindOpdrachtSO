@@ -8,6 +8,7 @@ using ToDoListBL.Services;
 using ToDoListGUI.Commands;
 using ToDoListGUI.PageStates;
 using ToDoListGUI.Services;
+using ToDoListGUI.ViewModels.ValitableField;
 
 namespace ToDoListGUI.ViewModels.UserDetail
 {
@@ -26,13 +27,10 @@ namespace ToDoListGUI.ViewModels.UserDetail
             DeleteCommand = new AsyncCommand(OnDeleteUser);
 
             NameBorderStroke = Brush.Transparent;
+            FirstNameField = new NonEmptyValidatableField(Brush.Transparent, Brush.Red);
         }
         public string Id { get; private set; }
-        public string FirstName
-        {
-            get => Get<String>();
-            set => Set(value);
-        }
+        public NonEmptyValidatableField FirstNameField { get; init; }
         public string LastName
         {
             get => Get<String>();
@@ -72,7 +70,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
             if (query.TryGetValue("id", out object oId) && oId is string id)
             {
                 _currentUser = _toDoService.GetUserById(id);
-                FirstName = _currentUser.FirstName;
+                FirstNameField.Value = _currentUser.FirstName;
                 LastName = _currentUser.LastName;
                 DateOfBirth = _currentUser.BirthDate;
                 ImageUrl = _currentUser.ImageURL;
@@ -100,7 +98,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
             if(State == PageState.Edit)
             {
                 // make new object or store one on creation of page?
-                _currentUser.FirstName = FirstName;
+                _currentUser.FirstName = FirstNameField.Value;
                 _currentUser.LastName = LastName;
                 _currentUser.BirthDate = DateOfBirth;
                 _currentUser.ImageURL = ImageUrl;
@@ -108,7 +106,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
             }
             else if (State == PageState.AddNew)
             {
-                _currentUser = new User(FirstName, LastName, DateOfBirth, ImageUrl, DateTime.Now);
+                _currentUser = new User(FirstNameField.Value, LastName, DateOfBirth, ImageUrl, DateTime.Now);
                 _toDoService.SaveNewUser(_currentUser);
             }
 
@@ -124,11 +122,7 @@ namespace ToDoListGUI.ViewModels.UserDetail
 
         public bool Validate()
         {
-            IsNameValid = !string.IsNullOrWhiteSpace(FirstName);
-
-            NameBorderStroke = IsNameValid ? Brush.Transparent : Brush.Red;
-
-            return IsNameValid;
+            return FirstNameField.Validate();
         }
     }
 }

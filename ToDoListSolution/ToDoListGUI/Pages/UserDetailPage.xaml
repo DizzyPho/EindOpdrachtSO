@@ -16,8 +16,8 @@
 
             <Entry Margin="8" Text="{Binding ImageUrl}"></Entry>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="FIRST NAME"></Label>
-            <Border Margin="8" Stroke="{Binding NameBorderStroke}">
-                <Entry Text="{Binding FirstName}">
+            <Border Margin="8" Stroke="{Binding FirstNameField.CurrentColor}">
+                <Entry Text="{Binding FirstNameField.Value}">
                 </Entry>
             </Border>
             <Label FontSize="Subtitle" TextColor="PaleVioletRed" Margin="8" Text="LAST NAME"></Label>
