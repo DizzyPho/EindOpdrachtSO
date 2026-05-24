@@ -23,8 +23,8 @@
             <Entry Margin="8" Text="{Binding Description}"></Entry>
             <Label Margin="8" Text="USER" TextColor="PaleVioletRed" FontSize="Subtitle"></Label>
            
-            <Border Stroke="{Binding UserBorderStroke}" Margin="8">
-                <Picker ItemsSource="{Binding UserNames}" SelectedItem="{Binding SelectedUser}"
+            <Border Stroke="{Binding SelectedUserField.CurrentColor}" Margin="8">
+                <Picker ItemsSource="{Binding UserNames}" SelectedItem="{Binding SelectedUserField.Value}"
                   ItemDisplayBinding="{Binding UserName}">
 
                 </Picker>

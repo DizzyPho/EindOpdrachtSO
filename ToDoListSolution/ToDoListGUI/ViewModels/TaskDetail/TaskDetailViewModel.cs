@@ -33,6 +33,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             SaveCommand = new AsyncCommand(OnSave);
 
             TitleField = new NonEmptyValidatableField(Brush.Transparent, Brush.Red);
+            SelectedUserField = new NotNullValidatableField<UserNameViewModel>(Brush.Transparent, Brush.Red);
         }
         public NonEmptyValidatableField TitleField { get; init; }
         public string Description
@@ -49,11 +50,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
         public ICommand GoBackCommand { get; init; }
         public ICommand SaveCommand { get; init; }
         public List<UserNameViewModel> UserNames { get; init; }
-        public UserNameViewModel SelectedUser
-        {
-            get => Get<UserNameViewModel>();
-            set => Set(value);
-        }
+        public NotNullValidatableField<UserNameViewModel> SelectedUserField { get; init;  }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
@@ -63,7 +60,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
                 TitleField.Value = _currentTask.Title;
                 Description = _currentTask.Description;
                 IsCompleted = _currentTask.IsCompleted;
-                SelectedUser = UserNames.FirstOrDefault(user => user.Id == _currentTask.ResponsibleUserId);
+                SelectedUserField.Value = UserNames.FirstOrDefault(user => user.Id == _currentTask.ResponsibleUserId);
             }
             else
             {
@@ -83,7 +80,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             }
             if(State == PageState.AddNew)
             {
-                _currentTask = new Todo(TitleField.Value, Description, IsCompleted, SelectedUser.Id, DateTime.Now);
+                _currentTask = new Todo(TitleField.Value, Description, IsCompleted, SelectedUserField.Value.Id, DateTime.Now);
                 _toDoService.SaveNewTask(_currentTask);
             }
             else if (State == PageState.Edit && _currentTask != null)
@@ -91,14 +88,15 @@ namespace ToDoListGUI.ViewModels.TaskDetail
                 _currentTask.Title = TitleField.Value;
                 _currentTask.Description = Description;
                 _currentTask.IsCompleted = IsCompleted;
-                _currentTask.ResponsibleUserId = SelectedUser.Id;
+                _currentTask.ResponsibleUserId = SelectedUserField.Value.Id;
                 _toDoService.UpdateTask(_currentTask);
             }
             await _navigationService.GoBackAsync();
         }
         public bool Validate()
         {
-            return TitleField.Validate();
+            return TitleField.Validate()
+                && SelectedUserField.Validate();
         }
     }
 }
