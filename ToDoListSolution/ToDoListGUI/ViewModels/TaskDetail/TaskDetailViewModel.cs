@@ -8,6 +8,7 @@ using ToDoListBL.Services;
 using ToDoListGUI.Commands;
 using ToDoListGUI.PageStates;
 using ToDoListGUI.Services;
+using ToDoListGUI.ViewModels.ValitableField;
 
 namespace ToDoListGUI.ViewModels.TaskDetail
 {
@@ -31,14 +32,9 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             GoBackCommand = new AsyncCommand(OnGoBack);
             SaveCommand = new AsyncCommand(OnSave);
 
-            TitleBorderStroke = Brush.Transparent;
-            UserBorderStroke = Brush.Transparent;
+            TitleField = new NonEmptyValidatableField(Brush.Transparent, Brush.Red);
         }
-        public string Title
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
+        public NonEmptyValidatableField TitleField { get; init; }
         public string Description
         {
             get => Get<string>();
@@ -50,26 +46,6 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             set => Set(value);
         }
 
-        public bool IsTitleValid
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-        public bool IsUserValid
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-        public Brush TitleBorderStroke
-        {
-            get => Get<Brush>(); 
-            set => Set(value);
-        }
-        public Brush UserBorderStroke
-        {
-            get => Get<Brush>();
-            set => Set(value);
-        }
         public ICommand GoBackCommand { get; init; }
         public ICommand SaveCommand { get; init; }
         public List<UserNameViewModel> UserNames { get; init; }
@@ -84,7 +60,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             if(query.TryGetValue("id", out object oId) && oId is string id)
             {
                 _currentTask = _toDoService.GetTaskById(id);
-                Title = _currentTask.Title;
+                TitleField.Value = _currentTask.Title;
                 Description = _currentTask.Description;
                 IsCompleted = _currentTask.IsCompleted;
                 SelectedUser = UserNames.FirstOrDefault(user => user.Id == _currentTask.ResponsibleUserId);
@@ -107,12 +83,12 @@ namespace ToDoListGUI.ViewModels.TaskDetail
             }
             if(State == PageState.AddNew)
             {
-                _currentTask = new Todo(Title, Description, IsCompleted, SelectedUser.Id, DateTime.Now);
+                _currentTask = new Todo(TitleField.Value, Description, IsCompleted, SelectedUser.Id, DateTime.Now);
                 _toDoService.SaveNewTask(_currentTask);
             }
             else if (State == PageState.Edit && _currentTask != null)
             {
-                _currentTask.Title = Title;
+                _currentTask.Title = TitleField.Value;
                 _currentTask.Description = Description;
                 _currentTask.IsCompleted = IsCompleted;
                 _currentTask.ResponsibleUserId = SelectedUser.Id;
@@ -122,13 +98,7 @@ namespace ToDoListGUI.ViewModels.TaskDetail
         }
         public bool Validate()
         {
-            IsTitleValid = !string.IsNullOrWhiteSpace(Title);
-            IsUserValid = SelectedUser != null;
-
-            TitleBorderStroke = IsTitleValid? Brush.Transparent : Brush.Red;
-            UserBorderStroke = IsUserValid? Brush.Transparent : Brush.Red;
-
-            return IsTitleValid && IsUserValid;
+            return TitleField.Validate();
         }
     }
 }
